@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MadHouseFinancialTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorPrimary">#000000</item>
+        <item name="colorAccent">@color/pastelRed</item>
+    </style>
+
+    <style name="MadHouseFinancialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="MadHouseFinancialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>
