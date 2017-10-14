@@ -213,6 +213,7 @@
                         android:foregroundTint="@color/primary_emi"
                         android:layout_gravity="center"
                         android:padding="10dp"
+                        android:max="25"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -254,7 +255,7 @@
                     android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="TENURE"
+                    android:text="TENURE "
                     android:textColor="@color/primary_emi"
                     android:textSize="21sp"
                     android:layout_height="match_parent" />
@@ -284,7 +285,7 @@
                         android:layout_width="match_parent"
                         android:layout_weight="3.25"
                         android:gravity="center"
-                        android:text="yearly"
+                        android:text="years"
                         android:textColor="@color/primary_emi"
                         android:textSize="13sp"
                         android:padding="5dp"
@@ -295,7 +296,7 @@
                         android:layout_width="match_parent"
                         android:layout_weight="3.25"
                         android:gravity="center"
-                        android:text="monthly"
+                        android:text="months"
                         android:textColor="#000000"
                         android:textSize="13sp"
                         android:padding="5dp"

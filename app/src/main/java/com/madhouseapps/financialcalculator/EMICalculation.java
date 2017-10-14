@@ -96,11 +96,19 @@ public class EMICalculation extends Fragment {
         rateChanger.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ratePercent.setText(""+progress+"%");
-                CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
-                        rateChanger.getProgress(),
-                        mory,
-                        Integer.parseInt(tenureInput.getText().toString().trim()));
+
+                if(progress==0){
+                    seekBar.setProgress(1);
+                    ratePercent.setText("1%");
+                } else {
+                    ratePercent.setText(""+progress+"%");
+                    CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
+                            rateChanger.getProgress(),
+                            mory,
+                            Integer.parseInt(tenureInput.getText().toString().trim()));
+                }
+
+
             }
 
             @Override
@@ -204,11 +212,9 @@ public class EMICalculation extends Fragment {
 
     public void CalculateAndSet(double amount, double rate, boolean mory, int tenure){
 
-        if(mory) {
-            rate = (rate/12)/100;
+        rate = (rate/12)/100;
+        if (mory) {
             tenure = tenure*12;
-        } else {
-            rate = (rate)/100;
         }
 
 
