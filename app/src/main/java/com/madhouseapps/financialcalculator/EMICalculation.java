@@ -97,6 +97,7 @@ public class EMICalculation extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+
                 if(progress==0){
                     seekBar.setProgress(1);
                     ratePercent.setText("1%");

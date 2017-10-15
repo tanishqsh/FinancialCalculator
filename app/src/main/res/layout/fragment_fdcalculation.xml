@@ -217,7 +217,7 @@
                         android:foregroundTint="@color/primary_fd"
                         android:layout_gravity="center"
                         android:padding="10sp"
-                        android:max="25"
+                        android:max="250"
                         android:layout_height="wrap_content" />
 
                     <TextView

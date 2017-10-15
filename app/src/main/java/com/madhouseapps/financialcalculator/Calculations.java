@@ -59,8 +59,8 @@ public class Calculations extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 5 total pages.
-            return 5;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
@@ -70,12 +70,6 @@ public class Calculations extends AppCompatActivity {
                     return "EMI";
                 case 1:
                     return "FD";
-                case 2:
-                    return "RD";
-                case 3:
-                    return "Retirement Planning";
-                case 4:
-                    return "SIP";
             }
             return null;
         }
