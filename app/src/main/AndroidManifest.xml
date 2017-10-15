@@ -11,7 +11,7 @@
         android:theme="@style/MadHouseFinancialTheme">
         <activity
             android:name=".Calculations"
-            android:label="@string/title_activity_calculations"
+            android:label="FinCal"
             android:theme="@style/MadHouseFinancialTheme">
 
             <intent-filter>

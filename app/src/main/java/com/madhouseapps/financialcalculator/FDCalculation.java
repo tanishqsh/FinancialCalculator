@@ -54,6 +54,8 @@ public class FDCalculation extends Fragment {
     Spinner CompoundingOptions;
     Button statsButton;
 
+    float decimalProgress;
+
     List<String> compoundingOptions = new ArrayList<>();
 
 
@@ -87,7 +89,7 @@ public class FDCalculation extends Fragment {
         CompoundingOptions = (Spinner) rootView.findViewById(R.id.CompoundingOptions);
         statsButton = (Button) rootView.findViewById(R.id.statsButton);
 
-        RateChanger.setProgress(5);
+        RateChanger.setProgress(50);
 
         compoundingOptions.clear();
         compoundingOptions.add("MONTHLY"); //1/12
@@ -98,6 +100,10 @@ public class FDCalculation extends Fragment {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, compoundingOptions);
         CompoundingOptions.setAdapter(dataAdapter);
         setFont();
+
+        CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                comp,
+                Integer.parseInt(TenureInput.getText().toString().trim()));
 
            /*
 
@@ -111,11 +117,14 @@ public class FDCalculation extends Fragment {
 
 
                 if(progress==0){
-                    seekBar.setProgress(1);
-                    RatePercent.setText("1%");
+                    seekBar.setProgress(5);
+                    decimalProgress = 0.5f;
+                    progress_value = decimalProgress;
+                    RatePercent.setText(""+decimalProgress+"%");
+
                 } else {
                     //RatePercent.setText(""+progress+"%");
-                    float decimalProgress = (float)(progress-(progress%5))/10;
+                    decimalProgress = (float)(progress-(progress%5))/10;
                     progress_value = decimalProgress;
                     RatePercent.setText(""+decimalProgress+"%");
                 }
@@ -297,9 +306,9 @@ public class FDCalculation extends Fragment {
         }
 
         double MV = Math.round(amount*(Math.pow(1+(rate2/n), n*ten)));
-        MVAmount.setText(rupee+" "+MV);
+        MVAmount.setText(""+Math.round(MV));
         double interest = MV - amount;
-        InterestAmount.setText(rupee+" "+interest);
+        InterestAmount.setText(""+Math.round(interest));
 
 
 

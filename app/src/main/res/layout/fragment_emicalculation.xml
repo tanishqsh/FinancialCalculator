@@ -37,16 +37,30 @@
 
             <!-- $300 row -->
 
-            <TextView
-                android:id="@+id/EMIAmount"
-                android:layout_width="match_parent"
-                android:text="₹ 300"
+            <LinearLayout android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingLeft="30dp"
                 android:layout_marginTop="-5sp"
-                android:textColor="#FFFFFF"
-                android:textSize="43sp"
-                android:layout_height="match_parent" />
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="₹"
+                    android:layout_weight="9"
+                    android:textColor="#FFFFFF"
+                    android:textSize="43sp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/EMIAmount"
+                    android:layout_width="match_parent"
+                    android:text="300"
+                    android:textColor="#FFFFFF"
+                    android:textSize="43sp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -79,16 +93,33 @@
 
                 <!-- Interest $300 row -->
 
-                <TextView
-                    android:id="@+id/InterestAmount"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:text="₹ 256"
                     android:layout_marginTop="-10sp"
-                    android:layout_weight="1"
                     android:paddingLeft="30sp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="34sp"
-                    android:layout_height="match_parent" />
+                    android:weightSum="10"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="₹"
+                        android:layout_weight="9"
+                        android:textColor="#FFFFFF"
+                        android:textSize="34sp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/InterestAmount"
+                        android:layout_width="match_parent"
+                        android:text="256"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:textColor="#FFFFFF"
+                        android:textSize="34sp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -114,16 +145,32 @@
 
                 <!-- Interest $300 row -->
 
-                <TextView
-                    android:id="@+id/TotalAmount"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:text="₹ 12000"
-                    android:layout_weight="1"
                     android:layout_marginTop="-10sp"
-                    android:paddingLeft="10sp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="34sp"
-                    android:layout_height="match_parent" />
+                    android:paddingLeft="10dp"
+                    android:weightSum="10"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="₹"
+                        android:layout_weight="9"
+                        android:textColor="#FFFFFF"
+                        android:textSize="34sp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/TotalAmount"
+                        android:layout_width="match_parent"
+                        android:text="12000"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:textColor="#FFFFFF"
+                        android:textSize="34sp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -216,7 +263,7 @@
                         android:foregroundTint="@color/primary_emi"
                         android:layout_gravity="center"
                         android:padding="10sp"
-                        android:max="25"
+                        android:max="250"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -224,7 +271,7 @@
                         android:layout_width="match_parent"
                         android:layout_weight="7"
                         android:gravity="center"
-                        android:text="7%"
+                        android:text="5%"
                         android:textColor="@color/primary_emi"
                         android:textSize="13sp"
                         android:padding="10sp"
