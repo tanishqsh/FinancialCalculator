@@ -52,7 +52,7 @@ public class Calculations extends AppCompatActivity {
             switch (position){
                 case 0: return new EMICalculation();
                 case 1: return new FDCalculation();
-                default: return new EMICalculation();
+                default: return new RDCalculation();
             }
 
         }
@@ -60,7 +60,7 @@ public class Calculations extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 2;
+            return 3;
         }
 
         @Override
@@ -70,6 +70,8 @@ public class Calculations extends AppCompatActivity {
                     return "EMI";
                 case 1:
                     return "FD";
+                case 2:
+                    return "RD";
             }
             return null;
         }

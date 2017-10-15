@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:weightSum="10"
     android:background="#FFFFFF"
-    tools:context="com.madhouseapps.financialcalculator.EMICalculation">
+    tools:context="com.madhouseapps.financialcalculator.RDCalculation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:layout_weight="7"
         android:weightSum="2"
         android:orientation="vertical"
-        android:background="@drawable/redgrad">
+        android:background="@drawable/greengrad">
 
         <!-- EMI -->
         <LinearLayout
@@ -24,9 +24,9 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/EMITitle"
+                android:id="@+id/MVTitle"
                 android:layout_width="match_parent"
-                android:text="EMI"
+                android:text="RD | MATURITY VALUE"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
                 android:textSize="21sp"
@@ -54,7 +54,7 @@
                     android:layout_height="match_parent" />
 
                 <TextView
-                    android:id="@+id/EMIAmount"
+                    android:id="@+id/MVAmount"
                     android:layout_width="match_parent"
                     android:text="300"
                     android:textColor="#FFFFFF"
@@ -132,45 +132,6 @@
                 android:orientation="vertical"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/TotalTitle"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:paddingLeft="10sp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="13sp"
-                    android:gravity="center_vertical"
-                    android:text="TOTAL PAYABLE"
-                    android:layout_height="match_parent" />
-
-                <!-- Interest $300 row -->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="-10sp"
-                    android:paddingLeft="10dp"
-                    android:weightSum="10"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="₹"
-                        android:layout_weight="9"
-                        android:textColor="#FFFFFF"
-                        android:textSize="25sp"
-                        android:layout_height="match_parent" />
-
-                    <TextView
-                        android:id="@+id/TotalAmount"
-                        android:layout_width="match_parent"
-                        android:text="12000"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:textColor="#FFFFFF"
-                        android:textSize="25sp"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -200,12 +161,12 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/LoanTitle"
+                android:id="@+id/DepositTitle"
                 android:layout_width="wrap_content"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:text="LOAN AMOUNT"
-                android:textColor="@color/primary_emi"
+                android:text="DEPOSIT"
+                android:textColor="@color/primary_rd"
                 android:textSize="21sp"
                 android:layout_height="match_parent" />
 
@@ -223,20 +184,20 @@
                     android:textSize="20sp"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/primary_emi"
+                    android:textColor="@color/primary_rd"
                     android:layout_height="match_parent" />
 
                 <EditText
-                    android:id="@+id/LoanInput"
+                    android:id="@+id/DepositInput"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_weight="2"
                     android:text="1000"
                     android:maxLength="7"
-                    android:textColor="@color/primary_emi"
+                    android:textColor="@color/primary_rd"
                     android:paddingStart="20sp"
-                    android:background="@drawable/redrectangles"
+                    android:background="@drawable/greenrectangles"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -267,7 +228,7 @@
                     android:gravity="center"
                     android:layout_weight="1"
                     android:text="RATE"
-                    android:textColor="@color/primary_emi"
+                    android:textColor="@color/primary_rd"
                     android:textSize="21sp"
                     android:layout_height="match_parent" />
 
@@ -294,10 +255,10 @@
                         android:layout_weight="7"
                         android:gravity="center"
                         android:text="5%"
-                        android:textColor="@color/primary_emi"
+                        android:textColor="@color/primary_rd"
                         android:textSize="13sp"
                         android:padding="10sp"
-                        android:background="@drawable/redrectangles"
+                        android:background="@drawable/greenrectangles"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -327,8 +288,8 @@
                     android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="TENURE "
-                    android:textColor="@color/primary_emi"
+                    android:text="QUARTERS"
+                    android:textColor="@color/primary_rd"
                     android:textSize="21sp"
                     android:layout_height="match_parent" />
 
@@ -346,32 +307,22 @@
                         android:inputType="number"
                         android:gravity="center"
                         android:textSize="21sp"
-                        android:text="4"
+                        android:text="3"
                         android:maxLength="2"
                         android:padding="10dp"
-                        android:textColor="@color/primary_emi"
-                        android:background="@drawable/redrectangles"
+                        android:textColor="@color/primary_rd"
+                        android:background="@drawable/greenrectangles"
                         android:layout_height="wrap_content" />
 
-                    <TextView
-                        android:id="@+id/TenureOptionsYearly"
-                        android:layout_width="match_parent"
-                        android:layout_weight="3.25"
-                        android:gravity="center"
-                        android:text="years"
-                        android:textColor="@color/primary_emi"
-                        android:textSize="14sp"
-                        android:padding="5sp"
-                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/TenureOptionsMonthly"
                         android:layout_width="match_parent"
-                        android:layout_weight="3.25"
+                        android:layout_weight="6.5"
                         android:gravity="center"
                         android:text="months"
-                        android:textColor="#000000"
-                        android:textSize="10sp"
+                        android:textColor="@color/primary_rd"
+                        android:textSize="14sp"
                         android:padding="5sp"
                         android:layout_height="wrap_content" />
 
@@ -397,7 +348,7 @@
                 android:text="Statistics"
                 android:layout_marginBottom="5dp"
                 style="?android:attr/borderlessButtonStyle"
-                android:background="@drawable/redbutton"
+                android:background="@drawable/greenbutton"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>

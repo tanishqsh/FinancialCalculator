@@ -184,7 +184,9 @@ public class FDCalculation extends Fragment {
             @Override
             public void onClick(View v) {
                 TenureOptionsYearly.setTextColor(getResources().getColor(R.color.primary_fd));
+                TenureOptionsYearly.setTextSize(14);
                 TenureOptionsMonthly.setTextColor(Color.parseColor("#000000"));
+                TenureOptionsMonthly.setTextSize(10);
                 mory = true;
 
                 CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
@@ -198,7 +200,9 @@ public class FDCalculation extends Fragment {
             @Override
             public void onClick(View v) {
                 TenureOptionsMonthly.setTextColor(getResources().getColor(R.color.primary_fd));
+                TenureOptionsMonthly.setTextSize(14);
                 TenureOptionsYearly.setTextColor(Color.parseColor("#000000"));
+                TenureOptionsYearly.setTextSize(10);
                 mory = false;
 
                 CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),

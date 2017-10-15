@@ -193,17 +193,39 @@
                 android:textSize="13sp"
                 android:layout_height="match_parent" />
 
-            <EditText
-                android:id="@+id/DepositInput"
+            <LinearLayout
                 android:layout_width="200dp"
-                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:text="1000"
-                android:maxLength="7"
-                android:textColor="@color/primary_fd"
-                android:paddingStart="20sp"
-                android:background="@drawable/bluerectangles"
-                android:inputType="number" />
+                android:weightSum="10"
+                android:layout_marginRight="40dp"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="8"
+                    android:text="@string/rupee"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/primary_fd"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/DepositInput"
+                    android:layout_width="match_parent"
+                    android:layout_weight="2"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="1000"
+                    android:maxLength="7"
+                    android:textColor="@color/primary_fd"
+                    android:paddingStart="20sp"
+                    android:background="@drawable/bluerectangles"
+                    android:inputType="number" />
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
@@ -296,7 +318,7 @@
                     android:layout_height="match_parent" />
 
                 <LinearLayout
-                    android:layout_width="250dp"
+                    android:layout_width="200dp"
                     android:orientation="horizontal"
                     android:weightSum="10"
                     android:layout_gravity="center"
@@ -323,7 +345,7 @@
                         android:gravity="center"
                         android:text="years"
                         android:textColor="@color/primary_fd"
-                        android:textSize="13sp"
+                        android:textSize="14sp"
                         android:padding="5sp"
                         android:layout_height="wrap_content" />
 
@@ -334,7 +356,7 @@
                         android:gravity="center"
                         android:text="months"
                         android:textColor="#000000"
-                        android:textSize="13sp"
+                        android:textSize="10sp"
                         android:padding="5sp"
                         android:layout_height="wrap_content" />
 

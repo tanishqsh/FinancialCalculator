@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,7 +142,9 @@ public class EMICalculation extends Fragment {
             @Override
             public void onClick(View v) {
                 tenureOptionsYearly.setTextColor(getResources().getColor(R.color.primary_emi));
+                tenureOptionsYearly.setTextSize(14);
                 tenureOptionsMonthly.setTextColor(Color.parseColor("#000000"));
+                tenureOptionsMonthly.setTextSize(10);
                 mory = true;
 
                 CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
@@ -154,7 +157,9 @@ public class EMICalculation extends Fragment {
             @Override
             public void onClick(View v) {
                 tenureOptionsMonthly.setTextColor(getResources().getColor(R.color.primary_emi));
+                tenureOptionsMonthly.setTextSize(14);
                 tenureOptionsYearly.setTextColor(Color.parseColor("#000000"));
+                tenureOptionsYearly.setTextSize(10);
                 mory = false;
 
                 CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
