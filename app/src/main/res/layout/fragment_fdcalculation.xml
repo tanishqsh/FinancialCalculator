@@ -2,15 +2,390 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:background="#FFFFFF"
     tools:context="com.madhouseapps.financialcalculator.FDCalculation">
 
-
-    <TextView
-        android:id="@+id/text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="FD Calculator"
-        android:textSize="24sp" />
+        android:layout_weight="7"
+        android:weightSum="2"
+        android:orientation="vertical"
+        android:background="@drawable/bluegrad">
+
+        <!-- EMI -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/MVtitle"
+                android:layout_width="match_parent"
+                android:text="FD | MATURITY VALUE"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:textSize="21sp"
+                android:paddingTop="10dp"
+                android:gravity="bottom"
+                android:paddingLeft="30dp"
+                android:layout_height="match_parent" />
+
+            <!-- $300 row -->
+
+            <TextView
+                android:id="@+id/MVAmount"
+                android:layout_width="match_parent"
+                android:text="₹ 300"
+                android:layout_weight="1"
+                android:paddingLeft="30dp"
+                android:layout_marginTop="-5sp"
+                android:textColor="#FFFFFF"
+                android:textSize="43sp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <!-- Horizontal One -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:layout_height="match_parent">
+
+            <!-- Interest -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/InterestTitle"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:paddingLeft="30sp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:gravity="center_vertical"
+                    android:text="INTEREST"
+                    android:layout_height="match_parent" />
+
+                <!-- Interest $300 row -->
+
+                <TextView
+                    android:id="@+id/InterestAmount"
+                    android:layout_width="match_parent"
+                    android:text="₹ 256"
+                    android:layout_marginTop="-10sp"
+                    android:layout_weight="1"
+                    android:paddingLeft="30sp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <!-- Total Payable -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/TotalTitle"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:paddingLeft="10sp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:gravity="center_vertical"
+                    android:text="TOTAL RETURN"
+                    android:layout_height="match_parent" />
+
+                <!-- Interest $300 row -->
+
+                <TextView
+                    android:id="@+id/TotalAmount"
+                    android:layout_width="match_parent"
+                    android:text="₹ 12000"
+                    android:layout_weight="1"
+                    android:layout_marginTop="-10sp"
+                    android:paddingLeft="10sp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:weightSum="5"
+        android:paddingTop="20sp"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+        <!-- LOAN -->
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/DepositTitle"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="DEPOSIT"
+                android:textColor="@color/primary_fd"
+                android:textSize="13sp"
+                android:layout_height="match_parent" />
+
+            <EditText
+                android:id="@+id/DepositInput"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:text="1000"
+                android:maxLength="7"
+                android:textColor="@color/primary_fd"
+                android:paddingStart="20sp"
+                android:background="@drawable/bluerectangles"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <!-- Rate -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <!-- RATE -->
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/RateTitle"
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="RATE"
+                    android:textColor="@color/primary_fd"
+                    android:textSize="13sp"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <SeekBar
+                        android:id="@+id/RateChanger"
+                        android:layout_width="match_parent"
+                        android:layout_weight="3"
+                        android:foregroundTint="@color/primary_fd"
+                        android:layout_gravity="center"
+                        android:padding="10sp"
+                        android:max="25"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/RatePercent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="7"
+                        android:gravity="center"
+                        android:text="7%"
+                        android:textColor="@color/primary_fd"
+                        android:textSize="13sp"
+                        android:padding="10sp"
+                        android:background="@drawable/bluerectangles"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!-- Tenure -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <!-- TENURE -->
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/TenureTitle"
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="TENURE "
+                    android:textColor="@color/primary_fd"
+                    android:textSize="13sp"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/TenureInput"
+                        android:layout_width="match_parent"
+                        android:layout_weight="3.5"
+                        android:inputType="number"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:text="4"
+                        android:maxLength="2"
+                        android:padding="10dp"
+                        android:textColor="@color/primary_fd"
+                        android:background="@drawable/bluerectangles"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/TenureOptionsYearly"
+                        android:layout_width="match_parent"
+                        android:layout_weight="3.25"
+                        android:gravity="center"
+                        android:text="years"
+                        android:textColor="@color/primary_fd"
+                        android:textSize="13sp"
+                        android:padding="5sp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/TenureOptionsMonthly"
+                        android:layout_width="match_parent"
+                        android:layout_weight="3.25"
+                        android:gravity="center"
+                        android:text="months"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        android:padding="5sp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Tenure -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <!-- TENURE -->
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/CompoundTitle"
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="COMPOUNDED"
+                    android:textColor="@color/primary_fd"
+                    android:textSize="13sp"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/CompoundingOptions"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/bluerectangles"
+                        android:layout_height="30dp">
+
+                    </Spinner>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/statsButton"
+                android:layout_width="300dp"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:text="Statistics"
+                android:layout_marginBottom="5dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:background="@drawable/bluebutton"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
 </LinearLayout>

@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="6.5"
+        android:layout_weight="7"
         android:weightSum="2"
         android:orientation="vertical"
         android:background="@drawable/redgrad">
@@ -43,6 +43,7 @@
                 android:text="₹ 300"
                 android:layout_weight="1"
                 android:paddingLeft="30dp"
+                android:layout_marginTop="-5sp"
                 android:textColor="#FFFFFF"
                 android:textSize="43sp"
                 android:layout_height="match_parent" />
@@ -54,7 +55,6 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_weight="1"
-            android:layout_marginTop="-30dp"
             android:weightSum="2"
             android:layout_height="match_parent">
 
@@ -70,10 +70,10 @@
                     android:id="@+id/InterestTitle"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:paddingLeft="30dp"
+                    android:paddingLeft="30sp"
                     android:textColor="#FFFFFF"
                     android:textSize="13sp"
-                    android:gravity="bottom"
+                    android:gravity="center_vertical"
                     android:text="INTEREST"
                     android:layout_height="match_parent" />
 
@@ -83,8 +83,9 @@
                     android:id="@+id/InterestAmount"
                     android:layout_width="match_parent"
                     android:text="₹ 256"
+                    android:layout_marginTop="-10sp"
                     android:layout_weight="1"
-                    android:paddingLeft="30dp"
+                    android:paddingLeft="30sp"
                     android:textColor="#FFFFFF"
                     android:textSize="34sp"
                     android:layout_height="match_parent" />
@@ -104,10 +105,10 @@
                     android:id="@+id/TotalTitle"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="10sp"
                     android:textColor="#FFFFFF"
                     android:textSize="13sp"
-                    android:gravity="bottom"
+                    android:gravity="center_vertical"
                     android:text="TOTAL PAYABLE"
                     android:layout_height="match_parent" />
 
@@ -118,7 +119,8 @@
                     android:layout_width="match_parent"
                     android:text="₹ 12000"
                     android:layout_weight="1"
-                    android:paddingLeft="10dp"
+                    android:layout_marginTop="-10sp"
+                    android:paddingLeft="10sp"
                     android:textColor="#FFFFFF"
                     android:textSize="34sp"
                     android:layout_height="match_parent" />
@@ -134,9 +136,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="3.5"
+        android:layout_weight="3"
         android:weightSum="4"
-        android:paddingTop="20dp"
+        android:paddingTop="20sp"
         android:background="#FFFFFF"
         android:orientation="vertical"
         android:layout_height="match_parent">
@@ -166,8 +168,9 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:text="1000"
+                android:maxLength="7"
                 android:textColor="@color/primary_emi"
-                android:paddingStart="20dp"
+                android:paddingStart="20sp"
                 android:background="@drawable/redrectangles"
                 android:inputType="number" />
 
@@ -212,7 +215,7 @@
                         android:layout_weight="3"
                         android:foregroundTint="@color/primary_emi"
                         android:layout_gravity="center"
-                        android:padding="10dp"
+                        android:padding="10sp"
                         android:max="25"
                         android:layout_height="wrap_content" />
 
@@ -224,7 +227,7 @@
                         android:text="7%"
                         android:textColor="@color/primary_emi"
                         android:textSize="13sp"
-                        android:padding="10dp"
+                        android:padding="10sp"
                         android:background="@drawable/redrectangles"
                         android:layout_height="wrap_content" />
 
@@ -275,6 +278,7 @@
                         android:gravity="center"
                         android:textSize="21sp"
                         android:text="4"
+                        android:maxLength="2"
                         android:padding="10dp"
                         android:textColor="@color/primary_emi"
                         android:background="@drawable/redrectangles"
@@ -288,7 +292,7 @@
                         android:text="years"
                         android:textColor="@color/primary_emi"
                         android:textSize="13sp"
-                        android:padding="5dp"
+                        android:padding="5sp"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -299,7 +303,7 @@
                         android:text="months"
                         android:textColor="#000000"
                         android:textSize="13sp"
-                        android:padding="5dp"
+                        android:padding="5sp"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -330,6 +334,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 
 </LinearLayout>

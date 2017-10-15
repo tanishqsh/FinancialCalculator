@@ -11,4 +11,6 @@
     <color name="shadow">#d3d3d3</color>
 
     <color name="primary_emi">#e52f66</color>
+    <color name="primary_rd">#4fbd69</color>
+    <color name="primary_fd">#43a7ef</color>
 </resources>
