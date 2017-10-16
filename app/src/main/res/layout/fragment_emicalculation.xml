@@ -213,11 +213,10 @@
                 android:layout_width="200dp"
                 android:layout_gravity="center"
                 android:weightSum="10"
-                android:layout_marginRight="40dp"
                 android:layout_height="50dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="80dp"
                     android:layout_weight="8"
                     android:text="@string/rupee"
                     android:textSize="20sp"
@@ -228,7 +227,7 @@
 
                 <EditText
                     android:id="@+id/LoanInput"
-                    android:layout_width="match_parent"
+                    android:layout_width="160dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_weight="2"
@@ -288,12 +287,14 @@
                         android:max="250"
                         android:layout_height="wrap_content" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/RatePercent"
                         android:layout_width="match_parent"
                         android:layout_weight="7"
                         android:gravity="center"
-                        android:text="5%"
+                        android:inputType="numberDecimal"
+                        android:text="5"
+                        android:maxLength="4"
                         android:textColor="@color/primary_emi"
                         android:textSize="13sp"
                         android:padding="10sp"

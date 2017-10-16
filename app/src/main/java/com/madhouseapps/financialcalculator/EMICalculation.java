@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.madhouseapps.financialcalculator.Helper.InputFilterMinMax;
 
 
 public class EMICalculation extends Fragment {
@@ -32,11 +35,14 @@ public class EMICalculation extends Fragment {
     double decimalProgress;
 
 
-    TextView emiAmount, tenureOptionsYearly, tenureOptionsMonthly, tenureTitle, ratePercent;
+    TextView emiAmount, tenureOptionsYearly, tenureOptionsMonthly, tenureTitle;
     TextView emiTitle, interestTitle, interestAmount, totalTitle, totalAmount, loanTitle, rateTitle;
     EditText tenureInput, loanInput;
+    EditText ratePercent;
     Button statsButton;
     SeekBar rateChanger;
+
+    TextWatcher textWatcher;
 
     public EMICalculation() {
         // Required empty public constructor
@@ -58,7 +64,7 @@ public class EMICalculation extends Fragment {
         loanTitle = (TextView) view.findViewById(R.id.LoanTitle);
         loanInput = (EditText) view.findViewById(R.id.LoanInput);
         rateTitle = (TextView) view.findViewById(R.id.RateTitle);
-        ratePercent = (TextView) view.findViewById(R.id.RatePercent);
+        ratePercent = (EditText) view.findViewById(R.id.RatePercent);
         tenureTitle = (TextView) view.findViewById(R.id.TenureTitle);
         tenureInput = (EditText) view.findViewById(R.id.TenureInput);
         tenureOptionsYearly = (TextView) view.findViewById(R.id.TenureOptionsYearly);
@@ -93,6 +99,45 @@ public class EMICalculation extends Fragment {
                 mory,
                 Integer.parseInt(tenureInput.getText().toString().trim()));
 
+
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(s.length()>0){
+
+                    if(s.charAt(s.toString().length()-1)=='.' || s.charAt(0)=='.'){
+                        //Dont do anything, wait for him to enter something after the '.'
+                    } else {
+                        if(!s.toString().equals("")){
+
+                            double value = Double.parseDouble(s.toString());
+                            value = value * 10;
+                            Toast.makeText(getContext(), ""+value, Toast.LENGTH_SHORT).show();
+                            rateChanger.setProgress((int)value);
+                            decimalProgress = (float)(Double.parseDouble(s.toString()));
+                            progress_value = decimalProgress;
+                            CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
+                                    mory,
+                                    Integer.parseInt(tenureInput.getText().toString().trim()));
+                        }
+                    }
+                }
+
+
+            }
+        };
+
         /*
 
         Live edits & outputs along with seeker progress
@@ -102,34 +147,36 @@ public class EMICalculation extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+                if(fromUser){
 
-                if(progress==0){
-                    seekBar.setProgress(5);
-                    decimalProgress = 0.5f;
-                    progress_value = decimalProgress;
-                    ratePercent.setText(""+decimalProgress+"%");
-                } else {
-                    //ratePercent.setText(""+progress+"%");
-                    decimalProgress = (float)(progress-(progress%5))/10;
-                    progress_value = decimalProgress;
-                    ratePercent.setText(""+decimalProgress+"%");
+                    if(progress==0){
+                        seekBar.setProgress(1);
+                        decimalProgress = 0.1;
+                        progress_value = decimalProgress;
+                        Toast.makeText(getContext(), ""+decimalProgress, Toast.LENGTH_SHORT).show();
+                        ratePercent.setText(""+decimalProgress);
+                    } else {
+                        decimalProgress = ((float) progress) / 10.0;
+                        progress_value = decimalProgress;
+                        ratePercent.setText(""+decimalProgress);
+                    }
+
+                    CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
+                            mory,
+                            Integer.parseInt(tenureInput.getText().toString().trim()));
+
+
                 }
-
-                CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
-                        mory,
-                        Integer.parseInt(tenureInput.getText().toString().trim()));
-
-
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                ratePercent.removeTextChangedListener(textWatcher);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                ratePercent.addTextChangedListener(textWatcher);
             }
         });
 
@@ -216,6 +263,10 @@ public class EMICalculation extends Fragment {
                 }
             }
         });
+
+        //ratePercent.setFilters(new InputFilter[]{new InputFilterMinMax("0", "250")});
+        ratePercent.addTextChangedListener(textWatcher);
+
 
 
         return view;
