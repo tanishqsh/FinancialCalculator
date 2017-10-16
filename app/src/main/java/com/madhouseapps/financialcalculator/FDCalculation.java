@@ -54,10 +54,11 @@ public class FDCalculation extends Fragment {
     Spinner CompoundingOptions;
     Button statsButton;
 
-    float decimalProgress;
+    double decimalProgress;
 
     List<String> compoundingOptions = new ArrayList<>();
 
+    TextWatcher textWatcher;
 
     public FDCalculation() {
     }
@@ -105,7 +106,48 @@ public class FDCalculation extends Fragment {
                 comp,
                 Integer.parseInt(TenureInput.getText().toString().trim()));
 
-           /*
+
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (s.length() > 0) {
+
+                    if (s.charAt(s.toString().length() - 1) == '.' || s.charAt(0) == '.') {
+                        //Dont do anything, wait for him to enter something after the '.'
+                    } else {
+                        if (!s.toString().equals("")) {
+
+                            double value = Double.parseDouble(s.toString());
+                            value = value * 10;
+                            RateChanger.setProgress((int) value);
+                            decimalProgress = (float) (Double.parseDouble(s.toString()));
+                            progress_value = decimalProgress;
+                            CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                                    comp,
+                                    Integer.parseInt(TenureInput.getText().toString().trim()));
+
+                        }
+                    }
+                }
+
+
+            }
+        };
+
+
+
+        /*
 
         Live edits & outputs along with seeker progress
 
@@ -114,36 +156,35 @@ public class FDCalculation extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+                if(fromUser){
+
+                    if(progress==0){
+                        seekBar.setProgress(1);
+                        decimalProgress = 0.1;
+                        progress_value = decimalProgress;
+                        RatePercent.setText(""+decimalProgress);
+                    } else {
+                        decimalProgress = ((float) progress) / 10.0;
+                        progress_value = decimalProgress;
+                        RatePercent.setText(""+decimalProgress);
+                    }
+
+                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                            comp,
+                            Integer.parseInt(TenureInput.getText().toString().trim()));
 
 
-                if(progress==0){
-                    seekBar.setProgress(5);
-                    decimalProgress = 0.5f;
-                    progress_value = decimalProgress;
-                    RatePercent.setText(""+decimalProgress+"%");
-
-                } else {
-                    //RatePercent.setText(""+progress+"%");
-                    decimalProgress = (float)(progress-(progress%5))/10;
-                    progress_value = decimalProgress;
-                    RatePercent.setText(""+decimalProgress+"%");
                 }
-
-                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        comp,
-                        Integer.parseInt(TenureInput.getText().toString().trim()));
-
-
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                RatePercent.removeTextChangedListener(textWatcher);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                RatePercent.addTextChangedListener(textWatcher);
             }
         });
 
@@ -254,6 +295,8 @@ public class FDCalculation extends Fragment {
                 }
             }
         });
+
+        RatePercent.addTextChangedListener(textWatcher);
 
         return rootView;
     }

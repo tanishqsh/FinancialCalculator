@@ -123,7 +123,6 @@ public class EMICalculation extends Fragment {
 
                             double value = Double.parseDouble(s.toString());
                             value = value * 10;
-                            Toast.makeText(getContext(), ""+value, Toast.LENGTH_SHORT).show();
                             rateChanger.setProgress((int)value);
                             decimalProgress = (float)(Double.parseDouble(s.toString()));
                             progress_value = decimalProgress;

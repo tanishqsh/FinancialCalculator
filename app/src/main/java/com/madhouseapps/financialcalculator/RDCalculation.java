@@ -34,8 +34,10 @@ public class RDCalculation extends Fragment {
     EditText TenureInput;
     Button statsButton;
 
-    float progress_value = 5;
-    float decimalProgress;
+    double progress_value = 5;
+    double decimalProgress;
+
+    TextWatcher textWatcher;
 
 
     public RDCalculation() {
@@ -67,6 +69,44 @@ public class RDCalculation extends Fragment {
 
         setFont();
 
+
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (s.length() > 0) {
+
+                    if (s.charAt(s.toString().length() - 1) == '.' || s.charAt(0) == '.') {
+                        //Dont do anything, wait for him to enter something after the '.'
+                    } else {
+                        if (!s.toString().equals("")) {
+
+                            double value = Double.parseDouble(s.toString());
+                            value = value * 10;
+                            RateChanger.setProgress((int) value);
+                            decimalProgress = (float) (Double.parseDouble(s.toString()));
+                            progress_value = decimalProgress;
+                            CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                                    Integer.parseInt(TenureInput.getText().toString().trim()));
+
+                        }
+                    }
+                }
+            }
+        };
+
+
+
         /*
 
         Live edits & outputs along with seeker progress
@@ -76,33 +116,34 @@ public class RDCalculation extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+                if(fromUser){
 
-                if(progress==0){
-                    seekBar.setProgress(5);
-                    decimalProgress = 0.5f;
-                    progress_value = decimalProgress;
-                    RatePercent.setText(""+decimalProgress+"%");
-                } else {
-                    //ratePercent.setText(""+progress+"%");
-                    decimalProgress = (float)(progress-(progress%5))/10;
-                    progress_value = decimalProgress;
-                    RatePercent.setText(""+decimalProgress+"%");
+                    if(progress==0){
+                        seekBar.setProgress(1);
+                        decimalProgress = 0.1;
+                        progress_value = decimalProgress;
+                        RatePercent.setText(""+decimalProgress);
+                    } else {
+                        decimalProgress = ((float) progress) / 10.0;
+                        progress_value = decimalProgress;
+                        RatePercent.setText(""+decimalProgress);
+                    }
+
+                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                            Integer.parseInt(TenureInput.getText().toString().trim()));
+
+
                 }
-
-                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        Integer.parseInt(TenureInput.getText().toString().trim()));
-
-
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                RatePercent.removeTextChangedListener(textWatcher);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                RatePercent.addTextChangedListener(textWatcher);
             }
         });
 
@@ -152,6 +193,8 @@ public class RDCalculation extends Fragment {
             }
         });
 
+        RatePercent.addTextChangedListener(textWatcher);
+
         return rootView;
     }
 
@@ -177,7 +220,7 @@ public class RDCalculation extends Fragment {
     public void CalculateAndSet(int amount, int tenure){
 
 
-        double rate2 = ((double)progress_value) / 400;
+        double rate2 = (progress_value) / 400;
         double local_tenure = tenure;
         double year_tenure;
 
