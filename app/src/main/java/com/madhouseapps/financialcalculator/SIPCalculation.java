@@ -1,5 +1,6 @@
 package com.madhouseapps.financialcalculator;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -59,6 +60,10 @@ public class SIPCalculation extends Fragment {
         RateChanger.setProgress(50);
 
         setFont();
+
+
+        CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                Integer.parseInt(TenureInput.getText().toString().trim()));
 
 
         textWatcher = new TextWatcher() {
@@ -190,6 +195,23 @@ public class SIPCalculation extends Fragment {
 
         RatePercent.addTextChangedListener(textWatcher);
 
+        statsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Statistics.class);
+
+                intent.putExtra("Amount", Float.parseFloat(DepositInput.getText().toString()));
+                intent.putExtra("Rate", progress_value);
+                intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
+                intent.putExtra("Compounding", 0);
+                intent.putExtra("TenureType", 0);
+                intent.putExtra("Calculation", 4);
+                intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
+                intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
+
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }
@@ -216,7 +238,7 @@ public class SIPCalculation extends Fragment {
     public void CalculateAndSet(int amount, int tenure){
 
 
-        double rate2 = ((double)progress_value) / 1200;
+        double rate2 = (progress_value) / 1200;
         double local_tenure = tenure;
         double year_tenure;
 

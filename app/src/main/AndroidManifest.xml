@@ -13,14 +13,13 @@
             android:name=".Calculations"
             android:label="FinCal"
             android:theme="@style/MadHouseFinancialTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".Statistics"></activity>
     </application>
 
 </manifest>

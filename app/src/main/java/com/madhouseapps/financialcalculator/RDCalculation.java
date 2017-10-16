@@ -1,5 +1,6 @@
 package com.madhouseapps.financialcalculator;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -68,6 +69,9 @@ public class RDCalculation extends Fragment {
         RateChanger.setProgress(50);
 
         setFont();
+
+        CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                Integer.parseInt(TenureInput.getText().toString().trim()));
 
 
         textWatcher = new TextWatcher() {
@@ -194,6 +198,24 @@ public class RDCalculation extends Fragment {
         });
 
         RatePercent.addTextChangedListener(textWatcher);
+
+        statsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Statistics.class);
+
+                intent.putExtra("Amount", Float.parseFloat(DepositInput.getText().toString()));
+                intent.putExtra("Rate", progress_value);
+                intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
+                intent.putExtra("Compounding", 0);
+                intent.putExtra("TenureType", 0);
+                intent.putExtra("Calculation", 3);
+                intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
+                intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
+
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }
