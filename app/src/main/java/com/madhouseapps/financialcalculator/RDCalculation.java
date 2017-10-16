@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class RDCalculation extends Fragment {
     EditText TenureInput;
     Button statsButton;
 
-    float progress_value;
+    float progress_value = 5;
     float decimalProgress;
 
 
@@ -176,9 +177,31 @@ public class RDCalculation extends Fragment {
     public void CalculateAndSet(int amount, int tenure){
 
 
-        double rate2 = progress_value / 400;
-        double MV = amount*(Math.pow(1+(rate2), 4*tenure));
-        double interest = MV-(amount*tenure);
+        double rate2 = ((double)progress_value) / 400;
+        double local_tenure = tenure;
+        double year_tenure;
+
+        //getting all the inputs perfectly
+
+        double MV=0;
+        double amt;
+
+        /*
+
+        For RD, we have to calculate Maturity of each month and then add them.
+
+         */
+        for(int i=0; i<tenure; i++){
+
+            year_tenure = local_tenure / 12;
+            amt = amount * Math.pow((1 + rate2), 4*year_tenure);
+            MV = MV + amt;
+            local_tenure = local_tenure - 1;
+
+        }
+
+        double interest = MV - (amount*tenure);
+
         MVAmount.setText(""+Math.round(MV));
         InterestAmount.setText(""+Math.round(interest));
 
