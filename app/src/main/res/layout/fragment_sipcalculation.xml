@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:weightSum="10"
     android:background="#FFFFFF"
-    tools:context="com.madhouseapps.financialcalculator.RDCalculation">
+    tools:context="com.madhouseapps.financialcalculator.SIPCalculation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:layout_weight="7"
         android:weightSum="2"
         android:orientation="vertical"
-        android:background="@drawable/greengrad">
+        android:background="@drawable/yellowgrad">
 
         <!-- EMI -->
         <LinearLayout
@@ -26,7 +26,7 @@
             <TextView
                 android:id="@+id/MVTitle"
                 android:layout_width="match_parent"
-                android:text="RD | MATURITY VALUE"
+                android:text="SIP | FUTURE RETURN"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
                 android:textSize="21sp"
@@ -165,8 +165,8 @@
                 android:layout_width="wrap_content"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:text="DEPOSIT"
-                android:textColor="@color/primary_rd"
+                android:text="MONTHLY DEPOSIT"
+                android:textColor="@color/primary_sip"
                 android:textSize="21sp"
                 android:layout_height="match_parent" />
 
@@ -184,7 +184,7 @@
                     android:textSize="20sp"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/primary_rd"
+                    android:textColor="@color/primary_sip"
                     android:layout_height="match_parent" />
 
                 <EditText
@@ -195,9 +195,9 @@
                     android:layout_weight="2"
                     android:text="1000"
                     android:maxLength="7"
-                    android:textColor="@color/primary_rd"
+                    android:textColor="@color/primary_sip"
                     android:paddingStart="20sp"
-                    android:background="@drawable/greenrectangles"
+                    android:background="@drawable/yellowrectangles"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -227,8 +227,8 @@
                     android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="RATE"
-                    android:textColor="@color/primary_rd"
+                    android:text="EXPECTED RATE"
+                    android:textColor="@color/primary_sip"
                     android:textSize="21sp"
                     android:layout_height="match_parent" />
 
@@ -243,7 +243,7 @@
                         android:id="@+id/RateChanger"
                         android:layout_width="match_parent"
                         android:layout_weight="3"
-                        android:foregroundTint="@color/primary_emi"
+                        android:foregroundTint="@color/primary_sip"
                         android:layout_gravity="center"
                         android:padding="0sp"
                         android:max="250"
@@ -255,10 +255,10 @@
                         android:layout_weight="7"
                         android:gravity="center"
                         android:text="5%"
-                        android:textColor="@color/primary_rd"
+                        android:textColor="@color/primary_sip"
                         android:textSize="13sp"
                         android:padding="10sp"
-                        android:background="@drawable/greenrectangles"
+                        android:background="@drawable/yellowrectangles"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -289,7 +289,7 @@
                     android:gravity="center"
                     android:layout_weight="1"
                     android:text="MONTHS"
-                    android:textColor="@color/primary_rd"
+                    android:textColor="@color/primary_sip"
                     android:textSize="21sp"
                     android:layout_height="match_parent" />
 
@@ -310,8 +310,8 @@
                         android:text="3"
                         android:maxLength="2"
                         android:padding="10dp"
-                        android:textColor="@color/primary_rd"
-                        android:background="@drawable/greenrectangles"
+                        android:textColor="@color/primary_sip"
+                        android:background="@drawable/yellowrectangles"
                         android:layout_height="wrap_content" />
 
 
@@ -321,7 +321,7 @@
                         android:layout_weight="6.5"
                         android:gravity="center"
                         android:text="months"
-                        android:textColor="@color/primary_rd"
+                        android:textColor="@color/primary_sip"
                         android:textSize="14sp"
                         android:padding="5sp"
                         android:layout_height="wrap_content" />
@@ -348,7 +348,7 @@
                 android:text="Statistics"
                 android:layout_marginBottom="5dp"
                 style="?android:attr/borderlessButtonStyle"
-                android:background="@drawable/greenbutton"
+                android:background="@drawable/yellowbutton"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>

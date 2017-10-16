@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_emi"
+        android:title="●"
+        android:icon="@drawable/eminav"
+        />
+    <item android:id="@+id/action_fd"
+        android:title="●"
+        android:icon="@drawable/fdnav"
+
+       />
+    <item android:id="@+id/action_rd"
+        android:title="●"
+        android:icon="@drawable/rdnav"
+         />
+    <item android:id="@+id/action_sip"
+        android:title="●"
+        android:icon="@drawable/sipnav"
+        />
+</menu>
