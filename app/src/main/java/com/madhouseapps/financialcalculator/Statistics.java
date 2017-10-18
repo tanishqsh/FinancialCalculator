@@ -88,14 +88,14 @@ public class Statistics extends AppCompatActivity {
     public void drawEMIGraph(){
 
         if(tenure_type==1){
-            tableArea.addView(new TableRow(this, "Year", "Principle", "Balance"));
+            tableArea.addView(new TableRow(this, "Month", "Principle", "Balance"));
         } else {
             tableArea.addView(new TableRow(this, "Month", "Principle", "Balance"));
         }
 
 
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
-        yvalues.add(new PieEntry(amount, "Loan"));
+        yvalues.add(new PieEntry(amount, "Loan Amount"));
         yvalues.add(new PieEntry(interest, "Interest"));
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
@@ -127,11 +127,27 @@ public class Statistics extends AppCompatActivity {
             //do nothing
         }
 
+
         double fullReturn = emi * tenure;
+        /*
+
         for(int i=0; i<(tenure); i++){
             fullReturn = fullReturn-emi;
             tableArea.addView(new TableRow(this, ""+(i+1), ""+emi, ""+Math.round(fullReturn)));
         }
+        */
+
+        rate = rate / 100;
+        for(int i=0; i<tenure; i++){
+            //double P = (rate*(amount)) / (1-(Math.pow((1+rate), -1*tenure)));
+            double I = (fullReturn * rate)/12;
+            double P = emi - I;
+            fullReturn = fullReturn-emi;
+            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(P), ""+Math.round(fullReturn)));
+
+        }
+
+
     }
 
     //fdgraph
