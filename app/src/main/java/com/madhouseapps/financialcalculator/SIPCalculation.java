@@ -1,6 +1,7 @@
 package com.madhouseapps.financialcalculator;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,13 @@ public class SIPCalculation extends Fragment {
 
     TextWatcher textWatcher;
 
+    /*
+true for year
+false for month
+*/
+    boolean mory = true;
+
+
     public SIPCalculation() {
     }
 
@@ -51,6 +59,7 @@ public class SIPCalculation extends Fragment {
         RateTitle = (TextView) rootView.findViewById(R.id.RateTitle);
         RatePercent = (TextView) rootView.findViewById(R.id.RatePercent);
         TenureTitle = (TextView) rootView.findViewById(R.id.TenureTitle);
+        TenureOptionsYearly = (TextView) rootView.findViewById(R.id.TenureOptionsYearly);
         TenureOptionsMonthly = (TextView) rootView.findViewById(R.id.TenureOptionsMonthly);
 
         DepositInput = (EditText) rootView.findViewById(R.id.DepositInput);
@@ -168,6 +177,42 @@ public class SIPCalculation extends Fragment {
             }
         });
 
+
+
+
+        /*
+        Tenure Option Change, Changes From Monthly to Yearly & Vice Versa
+         */
+
+        TenureOptionsYearly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TenureOptionsYearly.setTextColor(getResources().getColor(R.color.primary_sip));
+                TenureOptionsYearly.setTextSize(14);
+                TenureOptionsMonthly.setTextColor(Color.parseColor("#000000"));
+                TenureOptionsMonthly.setTextSize(10);
+                mory = true;
+
+                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                        Integer.parseInt(TenureInput.getText().toString().trim()));
+            }
+        });
+
+        TenureOptionsMonthly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TenureOptionsMonthly.setTextColor(getResources().getColor(R.color.primary_sip));
+                TenureOptionsMonthly.setTextSize(14);
+                TenureOptionsYearly.setTextColor(Color.parseColor("#000000"));
+                TenureOptionsYearly.setTextSize(10);
+                mory = false;
+
+                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                        Integer.parseInt(TenureInput.getText().toString().trim()));
+            }
+        });
+
+
         /*
         Live edits & outputs
          */
@@ -204,7 +249,7 @@ public class SIPCalculation extends Fragment {
                 intent.putExtra("Rate", progress_value);
                 intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
                 intent.putExtra("Compounding", 0);
-                intent.putExtra("TenureType", 0);
+                intent.putExtra("TenureType", returnforMory());
                 intent.putExtra("Calculation", 4);
                 intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
                 intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
@@ -214,6 +259,14 @@ public class SIPCalculation extends Fragment {
         });
 
         return rootView;
+    }
+
+    public int returnforMory(){
+        if(mory){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 
@@ -226,6 +279,8 @@ public class SIPCalculation extends Fragment {
         InterestAmount.setTypeface(poppins_bold);
         DepositTitle.setTypeface(poppins_bold);
         RateTitle.setTypeface(poppins_bold);
+        TenureOptionsYearly.setTypeface(poppins_bold);
+        TenureOptionsMonthly.setTypeface(poppins_bold);
         RatePercent.setTypeface(poppins_bold);
         TenureTitle.setTypeface(poppins_bold);
         TenureInput.setTypeface(poppins_bold);
@@ -236,6 +291,12 @@ public class SIPCalculation extends Fragment {
 
 
     public void CalculateAndSet(int amount, int tenure){
+
+        if(mory){
+            tenure = tenure * 12;
+        } else {
+            //do nothing
+        }
 
 
         double rate2 = (progress_value) / 1200;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Financial Calculator</string>
+    <string name="app_name">FinCal</string>
     <string name="title_activity_calculations">Calculations</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>

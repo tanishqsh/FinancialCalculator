@@ -38,7 +38,6 @@ public class FDCalculation extends Fragment {
     3  - Half Yearly
     4  - Yearly
      */
-    int comp = 4;
     double progress_value = 5;
 
     String rupee = "₹";
@@ -83,12 +82,10 @@ public class FDCalculation extends Fragment {
         TenureTitle = (TextView) rootView.findViewById(R.id.TenureTitle);
         TenureOptionsMonthly = (TextView) rootView.findViewById(R.id.TenureOptionsMonthly);
         TenureOptionsYearly = (TextView) rootView.findViewById(R.id.TenureOptionsYearly);
-        CompoundingTitle = (TextView) rootView.findViewById(R.id.CompoundTitle);
 
         DepositInput = (EditText) rootView.findViewById(R.id.DepositInput);
         TenureInput = (EditText) rootView.findViewById(R.id.TenureInput);
         RateChanger = (SeekBar) rootView.findViewById(R.id.RateChanger);
-        CompoundingOptions = (Spinner) rootView.findViewById(R.id.CompoundingOptions);
         statsButton = (Button) rootView.findViewById(R.id.statsButton);
 
         RateChanger.setProgress(50);
@@ -99,12 +96,9 @@ public class FDCalculation extends Fragment {
         compoundingOptions.add("HALF YEARLY"); //1/2
         compoundingOptions.add("YEARLY"); //1
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, compoundingOptions);
-        CompoundingOptions.setAdapter(dataAdapter);
         setFont();
 
         CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                comp,
                 Integer.parseInt(TenureInput.getText().toString().trim()));
 
 
@@ -135,7 +129,6 @@ public class FDCalculation extends Fragment {
                             decimalProgress = (float) (Double.parseDouble(s.toString()));
                             progress_value = decimalProgress;
                             CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                                    comp,
                                     Integer.parseInt(TenureInput.getText().toString().trim()));
 
                         }
@@ -171,7 +164,6 @@ public class FDCalculation extends Fragment {
                     }
 
                     CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                            comp,
                             Integer.parseInt(TenureInput.getText().toString().trim()));
 
 
@@ -189,34 +181,6 @@ public class FDCalculation extends Fragment {
             }
         });
 
-        CompoundingOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 1:
-                        comp = 1;
-                        break;
-                    case 2:
-                        comp = 2;
-                        break;
-                    case 3:
-                        comp = 3;
-                        break;
-                    case 4:
-                        comp = 4;
-                        break;
-                }
-
-                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        comp,
-                        Integer.parseInt(TenureInput.getText().toString().trim()));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         /*
         Tenure Option Change, Changes From Monthly to Yearly & Vice Versa
@@ -232,7 +196,6 @@ public class FDCalculation extends Fragment {
                 mory = true;
 
                 CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        comp,
                         Integer.parseInt(TenureInput.getText().toString().trim()));
 
             }
@@ -248,7 +211,6 @@ public class FDCalculation extends Fragment {
                 mory = false;
 
                 CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        comp,
                         Integer.parseInt(TenureInput.getText().toString().trim()));
 
             }
@@ -269,7 +231,6 @@ public class FDCalculation extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     CalculateAndSet(Integer.parseInt(s.toString().trim()),
-                            comp,
                             Integer.parseInt(TenureInput.getText().toString().trim()));
 
                 }
@@ -291,7 +252,6 @@ public class FDCalculation extends Fragment {
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
                     CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                            comp,
                             Integer.parseInt(s.toString().trim()));
                 }
             }
@@ -307,7 +267,7 @@ public class FDCalculation extends Fragment {
                 intent.putExtra("Amount", Float.parseFloat(DepositInput.getText().toString()));
                 intent.putExtra("Rate", progress_value);
                 intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
-                intent.putExtra("Compounding", comp);
+                intent.putExtra("Compounding", 0);
                 intent.putExtra("TenureType", returnforMory());
                 intent.putExtra("Calculation", 2);
                 intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
@@ -343,7 +303,6 @@ public class FDCalculation extends Fragment {
         TenureTitle.setTypeface(poppins_bold);
         TenureOptionsMonthly.setTypeface(poppins_bold);
         TenureOptionsYearly.setTypeface(poppins_bold);
-        CompoundingTitle.setTypeface(poppins_bold);
         TenureInput.setTypeface(poppins_bold);
         statsButton.setTypeface(poppins_bold);
         DepositInput.setTypeface(poppins_bold);
@@ -351,25 +310,10 @@ public class FDCalculation extends Fragment {
     }
 
 
-    public void CalculateAndSet(int amount, int comp, int tenure){
+    public void CalculateAndSet(int amount, int tenure){
 
         double rate2 = (progress_value) / 100;
-        int n = 1;
-        switch (comp){
-            case 1:
-                n = 12;
-                break;
-            case 2:
-                n = 4;
-                break;
-            case 3:
-                n = 2;
-                break;
-            case 4:
-                n = 1;
-                break;
-        }
-
+        int n = 4;
         //converting months to years
         double ten=0;
         if(!mory){

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:orientation="vertical"
+    tools:context="com.madhouseapps.financialcalculator.Home">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="7"
+        android:weightSum="5"
+        android:orientation="vertical"
+        android:layout_height="0dp">p
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:id="@+id/MAD"
+                android:textColor="#000000"
+                android:text="MAD"
+                android:textSize="18sp"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:id="@+id/HOUSE"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="HOUSE"
+                android:layout_height="match_parent" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="4"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="50dp"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/Quote"
+                android:layout_width="match_parent"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="It&apos;s not your salary that makes you rich, it&apos;s your spending habits."
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/Author"
+                android:layout_width="match_parent"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:textStyle="italic"
+                android:text="— Charles A Jaffer"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:weightSum="4"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="70dp"
+                android:id="@+id/EMIButton"
+                android:background="@drawable/redcircle"
+                android:gravity="center"
+                android:text="EMI"
+                android:textColor="#FFF"
+                android:layout_height="70dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="70dp"
+                android:id="@+id/FDButton"
+                android:background="@drawable/bluecircle"
+                android:gravity="center"
+                android:text="FD"
+                android:textColor="#FFF"
+                android:layout_height="70dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="70dp"
+                android:id="@+id/RDButton"
+                android:background="@drawable/greencircle"
+                android:gravity="center"
+                android:text="RD"
+                android:textColor="#FFF"
+                android:layout_height="70dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="70dp"
+                android:id="@+id/SIPButton"
+                android:background="@drawable/yellowcircle"
+                android:gravity="center"
+                android:text="SIP"
+                android:textColor="#FFF"
+                android:layout_height="70dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

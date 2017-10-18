@@ -1,5 +1,6 @@
 package com.madhouseapps.financialcalculator;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.WindowManager;
 import android.widget.TextView;
 
 public class Calculations extends AppCompatActivity {
@@ -32,8 +34,13 @@ public class Calculations extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculations);
+
+        Intent i = getIntent();
+        int choice = i.getIntExtra("Choice", 1);
 
 
 
@@ -99,6 +106,34 @@ public class Calculations extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        switch (choice) {
+            case 1:
+                mViewPager.setCurrentItem(0);
+                navigationView.setItemIconTintList(emiList);
+                navigationView.getMenu().getItem(0).setChecked(false);
+                navigationView.getMenu().getItem(0).setChecked(true);
+                break;
+            case 2:
+                mViewPager.setCurrentItem(1);
+                navigationView.setItemIconTintList(fdList);
+                navigationView.getMenu().getItem(0).setChecked(false);
+                navigationView.getMenu().getItem(1).setChecked(true);
+                break;
+            case 3:
+                mViewPager.setCurrentItem(2);
+                navigationView.setItemIconTintList(rdList);
+                navigationView.getMenu().getItem(0).setChecked(false);
+                navigationView.getMenu().getItem(2).setChecked(true);
+                break;
+            case 4:
+                mViewPager.setCurrentItem(3);
+                navigationView.setItemIconTintList(sipList);
+                navigationView.getMenu().getItem(0).setChecked(false);
+                navigationView.getMenu().getItem(3).setChecked(true);
+                break;
+        }
+
+
         navigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -107,18 +142,22 @@ public class Calculations extends AppCompatActivity {
                             case R.id.action_emi:
                                 mViewPager.setCurrentItem(0);
                                 navigationView.setItemIconTintList(emiList);
+
                                 break;
                             case R.id.action_fd:
                                 mViewPager.setCurrentItem(1);
                                 navigationView.setItemIconTintList(fdList);
+
                                 break;
                             case R.id.action_rd:
                                 mViewPager.setCurrentItem(2);
                                 navigationView.setItemIconTintList(rdList);
+
                                 break;
                             case R.id.action_sip:
                                 mViewPager.setCurrentItem(3);
                                 navigationView.setItemIconTintList(sipList);
+
                                 break;
                         }
                         return false;

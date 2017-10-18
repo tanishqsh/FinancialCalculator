@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -41,6 +42,8 @@ public class Statistics extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
@@ -84,7 +87,11 @@ public class Statistics extends AppCompatActivity {
     //emigraph
     public void drawEMIGraph(){
 
-        tableArea.addView(new TableRow(this, "Tenure", "EMI", "Amount Returned"));
+        if(tenure_type==1){
+            tableArea.addView(new TableRow(this, "Year", "Principle", "Balance"));
+        } else {
+            tableArea.addView(new TableRow(this, "Month", "Principle", "Balance"));
+        }
 
 
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
@@ -93,18 +100,19 @@ public class Statistics extends AppCompatActivity {
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(getResources().getColor(R.color.primary_emi));
-        colors.add(Color.parseColor("#D32F2F"));
+        colors.add(Color.parseColor("#FF5252"));
 
-        PieDataSet dataSet = new PieDataSet(yvalues, "EMI Interest Incurred");
+        PieDataSet dataSet = new PieDataSet(yvalues, "");
         dataSet.setColors(colors);
         dataSet.setValueTextColor(getResources().getColor(R.color.primary_emi));
 
         PieData pieData = new PieData(dataSet);
         pieData.setValueTextColor(Color.WHITE);
+        pieData.setValueTextSize(14);
         pieData.setValueTypeface(poppins_bold);
 
         chart.setData(pieData);
-        chart.setCenterText("EMI: "+emi);
+        chart.setCenterText("Total Payable: "+(amount+interest));
         chart.setCenterTextTypeface(poppins_bold);
         chart.animateX(500);
         chart.setCenterTextColor(getResources().getColor(R.color.primary_emi));
@@ -119,9 +127,9 @@ public class Statistics extends AppCompatActivity {
             //do nothing
         }
 
-        double fullReturn = 0;
+        double fullReturn = emi * tenure;
         for(int i=0; i<(tenure); i++){
-            fullReturn = fullReturn+emi;
+            fullReturn = fullReturn-emi;
             tableArea.addView(new TableRow(this, ""+(i+1), ""+emi, ""+Math.round(fullReturn)));
         }
     }
@@ -129,7 +137,13 @@ public class Statistics extends AppCompatActivity {
     //fdgraph
     public void drawFDGraph(){
 
-        tableArea.addView(new TableRow(this, "Tenure", "Interest", "Amount"));
+        if(tenure_type==1){
+            tableArea.addView(new TableRow(this, "Year", "Interest", "Deposit Amount"));
+        } else {
+            tableArea.addView(new TableRow(this, "Month", "Interest", "Deposit Amount"));
+        }
+
+
 
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
         yvalues.add(new PieEntry(amount, "Amount"));
@@ -139,16 +153,17 @@ public class Statistics extends AppCompatActivity {
         colors.add(getResources().getColor(R.color.primary_fd));
         colors.add(Color.parseColor("#2196F3"));
 
-        PieDataSet dataSet = new PieDataSet(yvalues, "Total Return");
+        PieDataSet dataSet = new PieDataSet(yvalues, "");
         dataSet.setColors(colors);
         dataSet.setValueTextColor(getResources().getColor(R.color.primary_fd));
 
         PieData pieData = new PieData(dataSet);
         pieData.setValueTextColor(Color.WHITE);
+        pieData.setValueTextSize(14);
         pieData.setValueTypeface(poppins_bold);
 
         chart.setData(pieData);
-        chart.setCenterText("Return: "+MV);
+        chart.setCenterText("Maturity Value: "+MV);
         chart.setCenterTextTypeface(poppins_bold);
         chart.animateX(500);
         chart.setCenterTextColor(getResources().getColor(R.color.primary_fd));
@@ -169,7 +184,7 @@ public class Statistics extends AppCompatActivity {
             double inte = (rate) * amount;
             sum_inte = sum_inte + inte;
             amount = (float) (amount + inte);
-            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(sum_inte), ""+Math.round(amount)));
+            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(inte), ""+Math.round(amount)));
         }
 
 
@@ -177,7 +192,15 @@ public class Statistics extends AppCompatActivity {
 
     //rdgraph
     public void drawRDGraph(){
-        tableArea.addView(new TableRow(this, "Tenure", "Interest", "Maturity"));
+        if(tenure_type==1){
+            tableArea.addView(new TableRow(this, "Month", "Interest", "Maturity Value"));
+        } else {
+            tableArea.addView(new TableRow(this, "Month", "Interest", "Maturity Value"));
+        }
+
+        if(tenure_type==1){
+            tenure=tenure*12;
+        }
 
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
         yvalues.add(new PieEntry(amount*tenure, "Amount"));
@@ -187,12 +210,13 @@ public class Statistics extends AppCompatActivity {
         colors.add(getResources().getColor(R.color.primary_rd));
         colors.add(Color.parseColor("#388E3C"));
 
-        PieDataSet dataSet = new PieDataSet(yvalues, "Total Return");
+        PieDataSet dataSet = new PieDataSet(yvalues, "");
         dataSet.setColors(colors);
         dataSet.setValueTextColor(getResources().getColor(R.color.primary_rd));
 
         PieData pieData = new PieData(dataSet);
         pieData.setValueTextColor(Color.WHITE);
+        pieData.setValueTextSize(14);
         pieData.setValueTypeface(poppins_bold);
 
         chart.setData(pieData);
@@ -204,6 +228,7 @@ public class Statistics extends AppCompatActivity {
         desc.setTypeface(poppins_bold);
         chart.setDescription(desc);
         chart.getLegend().setTextColor(Color.WHITE);
+
 
         double rate2 = (rate) / 400;
         double local_tenure = tenure;
@@ -223,7 +248,7 @@ public class Statistics extends AppCompatActivity {
 
             year_tenure = local_tenure / 12;
             amt = amount * Math.pow((1 + rate2), 4*year_tenure);
-            interest = interest + (amt - amount);
+            interest = (amt - amount);
             MV = MV + amt;
             local_tenure = local_tenure - 1;
             tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(interest), ""+Math.round(MV)));
@@ -237,7 +262,16 @@ public class Statistics extends AppCompatActivity {
 
     //sipgraph
     public void drawSIPGraph(){
-        tableArea.addView(new TableRow(this, "Tenure", "Interest", "Maturity"));
+
+        if(tenure_type==1){
+            tableArea.addView(new TableRow(this, "Month", "Return", "Total Value"));
+        } else {
+            tableArea.addView(new TableRow(this, "Month", "Return", "Total Value"));
+        }
+
+        if(tenure_type==1){
+            tenure=tenure*12;
+        }
 
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
         yvalues.add(new PieEntry(amount*tenure, "Amount"));
@@ -247,16 +281,17 @@ public class Statistics extends AppCompatActivity {
         colors.add(getResources().getColor(R.color.primary_sip));
         colors.add(Color.parseColor("#FFA000"));
 
-        PieDataSet dataSet = new PieDataSet(yvalues, "Total Return");
+        PieDataSet dataSet = new PieDataSet(yvalues, "");
         dataSet.setColors(colors);
         dataSet.setValueTextColor(getResources().getColor(R.color.primary_sip));
 
         PieData pieData = new PieData(dataSet);
         pieData.setValueTextColor(Color.WHITE);
+        pieData.setValueTextSize(14);
         pieData.setValueTypeface(poppins_bold);
 
         chart.setData(pieData);
-        chart.setCenterText("Return: "+MV);
+        chart.setCenterText("Maturity Value: "+MV);
         chart.setCenterTextTypeface(poppins_bold);
         chart.animateX(500);
         chart.setCenterTextColor(getResources().getColor(R.color.primary_sip));
@@ -264,6 +299,7 @@ public class Statistics extends AppCompatActivity {
         desc.setTypeface(poppins_bold);
         chart.setDescription(desc);
         chart.getLegend().setTextColor(Color.WHITE);
+
 
         double rate2 = (rate) / 1200;
         double local_tenure = tenure;
@@ -284,7 +320,7 @@ public class Statistics extends AppCompatActivity {
 
             year_tenure = local_tenure / 12;
             amt = amount * Math.pow((1 + rate2), 4*year_tenure);
-            interest = interest + (amt - amount);
+            interest = (amt - amount);
             MV = MV + amt;
             local_tenure = local_tenure - 1;
             tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(interest), ""+Math.round(MV)));
