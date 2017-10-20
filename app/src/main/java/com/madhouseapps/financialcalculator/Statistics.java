@@ -154,9 +154,9 @@ public class Statistics extends AppCompatActivity {
     public void drawFDGraph(){
 
         if(tenure_type==1){
-            tableArea.addView(new TableRow(this, "Year", "Interest", "Deposit Amount"));
+            tableArea.addView(new TableRow(this, "Year", "Interest", "Value"));
         } else {
-            tableArea.addView(new TableRow(this, "Month", "Interest", "Deposit Amount"));
+            tableArea.addView(new TableRow(this, "Month", "Interest", "Value"));
         }
 
 
@@ -209,9 +209,9 @@ public class Statistics extends AppCompatActivity {
     //rdgraph
     public void drawRDGraph(){
         if(tenure_type==1){
-            tableArea.addView(new TableRow(this, "Month", "Interest", "Maturity Value"));
+            tableArea.addView(new TableRow(this, "Month", "Interest", "Value"));
         } else {
-            tableArea.addView(new TableRow(this, "Month", "Interest", "Maturity Value"));
+            tableArea.addView(new TableRow(this, "Month", "Interest", "Value"));
         }
 
         if(tenure_type==1){
@@ -280,9 +280,9 @@ public class Statistics extends AppCompatActivity {
     public void drawSIPGraph(){
 
         if(tenure_type==1){
-            tableArea.addView(new TableRow(this, "Month", "Return", "Total Value"));
+            tableArea.addView(new TableRow(this, "Month", "Return", "Value"));
         } else {
-            tableArea.addView(new TableRow(this, "Month", "Return", "Total Value"));
+            tableArea.addView(new TableRow(this, "Month", "Return", "Value"));
         }
 
         if(tenure_type==1){
@@ -323,7 +323,7 @@ public class Statistics extends AppCompatActivity {
 
         //getting all the inputs perfectly
 
-        double MV=0;
+        double MVa=amount;
         double amt;
         double interest=0;
 
@@ -331,7 +331,7 @@ public class Statistics extends AppCompatActivity {
 
         For RD, we have to calculate Maturity of each month and then add them.
 
-         */
+
         for(int i=0; i<tenure; i++){
 
             year_tenure = local_tenure / 12;
@@ -339,11 +339,19 @@ public class Statistics extends AppCompatActivity {
             interest = (amt - amount);
             MV = MV + amt;
             local_tenure = local_tenure - 1;
-            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(interest), ""+Math.round(MV)));
+
 
 
         }
+        */
 
+        for(int i=0; i<tenure; i++){
+            interest = MVa * rate2;
+            MVa = MVa + interest;
+            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(interest), ""+Math.round(MVa)));
+            MVa = MVa + amount;
+
+        }
 
     }
 }

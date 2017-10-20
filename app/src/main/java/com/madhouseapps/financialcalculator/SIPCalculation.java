@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class SIPCalculation extends Fragment {
@@ -308,11 +309,19 @@ false for month
         double MV=0;
         double amt;
 
+        MV = amount;
+        for(int i=0; i<tenure; i++){
+            MV = MV + (MV * rate2);
+            MV = MV + amount;
+
+        }
+
+
         /*
 
         For RD, we have to calculate Maturity of each month and then add them.
 
-         */
+
         for(int i=0; i<tenure; i++){
 
             year_tenure = local_tenure / 12;
@@ -321,6 +330,7 @@ false for month
             local_tenure = local_tenure - 1;
 
         }
+        */
 
         double interest = MV - (amount*tenure);
 
