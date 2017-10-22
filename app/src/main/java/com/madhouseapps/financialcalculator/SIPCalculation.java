@@ -5,8 +5,10 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class SIPCalculation extends Fragment {
 
 
-    TextView MVtitle, MVAmount, InterestTitle, InterestAmount, TotalTitle, TotalAmount;
+    TextView MVtitle, MVAmount, InterestTitle, InterestAmount;
     TextView DepositTitle;
     EditText DepositInput;
     TextView RateTitle, RatePercent;
@@ -94,6 +95,7 @@ false for month
 
                     if (s.charAt(s.toString().length() - 1) == '.' || s.charAt(0) == '.') {
                         //Dont do anything, wait for him to enter something after the '.'
+                        Log.d("DECIMAL", "Successfully Bugged");
                     } else {
                         if (!s.toString().equals("")) {
 
@@ -131,11 +133,11 @@ false for month
                         seekBar.setProgress(1);
                         decimalProgress = 0.1;
                         progress_value = decimalProgress;
-                        RatePercent.setText(""+decimalProgress);
+                        RatePercent.setText(String.valueOf(decimalProgress));
                     } else {
                         decimalProgress = ((float) progress) / 10.0;
                         progress_value = decimalProgress;
-                        RatePercent.setText(""+decimalProgress);
+                        RatePercent.setText(String.valueOf(decimalProgress));
                     }
 
                     CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
@@ -188,7 +190,7 @@ false for month
         TenureOptionsYearly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TenureOptionsYearly.setTextColor(getResources().getColor(R.color.primary_sip));
+                TenureOptionsYearly.setTextColor(ContextCompat.getColor(getContext(),R.color.primary_sip));
                 TenureOptionsYearly.setTextSize(14);
                 TenureOptionsMonthly.setTextColor(Color.parseColor("#000000"));
                 TenureOptionsMonthly.setTextSize(10);
@@ -202,7 +204,7 @@ false for month
         TenureOptionsMonthly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TenureOptionsMonthly.setTextColor(getResources().getColor(R.color.primary_sip));
+                TenureOptionsMonthly.setTextColor(ContextCompat.getColor(getContext(), R.color.primary_sip));
                 TenureOptionsMonthly.setTextSize(14);
                 TenureOptionsYearly.setTextColor(Color.parseColor("#000000"));
                 TenureOptionsYearly.setTextSize(10);
@@ -295,25 +297,21 @@ false for month
 
         if(mory){
             tenure = tenure * 12;
-        } else {
-            //do nothing
         }
-
 
         double rate2 = (progress_value) / 1200;
         //getting all the inputs perfectly
 
-        double MV=0;
         double inte;
 
-        MV = amount;
+        double MV = amount;
         double inte_sum = 0;
         for(int i=0; i<tenure; i++){
             inte = MV * rate2;
             MV = MV + inte;
             inte_sum = inte_sum + inte;
-            MVAmount.setText(""+Math.round(MV));
-            InterestAmount.setText(""+Math.round(inte_sum));
+            MVAmount.setText(String.valueOf(Math.round(MV)));
+            InterestAmount.setText(String.valueOf(Math.round(inte_sum)));
             MV = MV + amount;
 
         }
