@@ -35,7 +35,7 @@ public class RDCalculation extends Fragment {
     EditText TenureInput;
     Button statsButton;
 
-    double progress_value = 5;
+    double progress_value = 8;
     double decimalProgress;
 
     TextWatcher textWatcher;
@@ -73,7 +73,7 @@ public class RDCalculation extends Fragment {
         TenureInput = (EditText) rootView.findViewById(R.id.TenureInput);
         RateChanger = (SeekBar) rootView.findViewById(R.id.RateChanger);
         statsButton = (Button) rootView.findViewById(R.id.statsButton);
-        RateChanger.setProgress(50);
+        RateChanger.setProgress(80);
 
         setFont();
 

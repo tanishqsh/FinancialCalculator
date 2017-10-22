@@ -38,7 +38,7 @@ public class FDCalculation extends Fragment {
     3  - Half Yearly
     4  - Yearly
      */
-    double progress_value = 5;
+    double progress_value = 7.5;
 
     String rupee = "₹";
 
@@ -88,7 +88,7 @@ public class FDCalculation extends Fragment {
         RateChanger = (SeekBar) rootView.findViewById(R.id.RateChanger);
         statsButton = (Button) rootView.findViewById(R.id.statsButton);
 
-        RateChanger.setProgress(50);
+        RateChanger.setProgress(75);
 
         compoundingOptions.clear();
         compoundingOptions.add("MONTHLY"); //1/12

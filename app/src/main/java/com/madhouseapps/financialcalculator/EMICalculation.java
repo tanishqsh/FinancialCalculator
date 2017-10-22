@@ -33,7 +33,7 @@ public class EMICalculation extends Fragment {
 
     String rupee = "₹";
     String rupeeCode;
-    double progress_value=5;
+    double progress_value=10;
     double decimalProgress;
 
 
@@ -73,7 +73,7 @@ public class EMICalculation extends Fragment {
         tenureOptionsMonthly = (TextView) view.findViewById(R.id.TenureOptionsMonthly);
         statsButton = (Button) view.findViewById(R.id.statsButton);
         rateChanger = (SeekBar) view.findViewById(R.id.RateChanger);
-        rateChanger.setProgress(50);
+        rateChanger.setProgress(100);
 
         rupeeCode = getResources().getString(R.string.rupee);
 

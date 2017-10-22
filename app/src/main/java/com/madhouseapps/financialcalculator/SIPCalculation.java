@@ -29,7 +29,7 @@ public class SIPCalculation extends Fragment {
     EditText TenureInput;
     Button statsButton;
 
-    double progress_value = 5;
+    double progress_value = 12;
     double decimalProgress;
 
     TextWatcher textWatcher;
@@ -67,7 +67,7 @@ false for month
         TenureInput = (EditText) rootView.findViewById(R.id.TenureInput);
         RateChanger = (SeekBar) rootView.findViewById(R.id.RateChanger);
         statsButton = (Button) rootView.findViewById(R.id.statsButton);
-        RateChanger.setProgress(50);
+        RateChanger.setProgress(120);
 
         setFont();
 
@@ -301,41 +301,24 @@ false for month
 
 
         double rate2 = (progress_value) / 1200;
-        double local_tenure = tenure;
-        double year_tenure;
-
         //getting all the inputs perfectly
 
         double MV=0;
-        double amt;
+        double inte;
 
         MV = amount;
+        double inte_sum = 0;
         for(int i=0; i<tenure; i++){
-            MV = MV + (MV * rate2);
+            inte = MV * rate2;
+            MV = MV + inte;
+            inte_sum = inte_sum + inte;
+            MVAmount.setText(""+Math.round(MV));
+            InterestAmount.setText(""+Math.round(inte_sum));
             MV = MV + amount;
 
         }
 
 
-        /*
-
-        For RD, we have to calculate Maturity of each month and then add them.
-
-
-        for(int i=0; i<tenure; i++){
-
-            year_tenure = local_tenure / 12;
-            amt = amount * Math.pow((1 + rate2), 4*year_tenure);
-            MV = MV + amt;
-            local_tenure = local_tenure - 1;
-
-        }
-        */
-
-        double interest = MV - (amount*tenure);
-
-        MVAmount.setText(""+Math.round(MV));
-        InterestAmount.setText(""+Math.round(interest));
 
     }
 }
