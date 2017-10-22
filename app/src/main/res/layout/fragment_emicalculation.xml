@@ -233,7 +233,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="2"
                     android:text="100000"
-                    android:maxLength="7"
+                    android:maxLength="9"
                     android:textColor="@color/primary_emi"
                     android:paddingStart="20sp"
                     android:background="@drawable/redrectangles"
