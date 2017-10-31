@@ -3,7 +3,43 @@
     <string name="title_activity_calculations">Calculations</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
-
-
     <string name="rupee">\u20B9</string>
+    <string name="emdash"> — </string>
+    <string name="emi_description">An equated monthly installment (EMI) is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. Equated monthly installments are used to pay off both interest and principal each month so that over a specified number of years, the loan is paid off in full.</string>
+    <string name="fd_description">A fixed deposit (FD) is a financial instrument provided by banks or NBFCs which provides investors with a higher rate of interest than a regular savings account, until the given maturity date. It may or may not require the creation of a separate account.</string>
+    <string name="rd_description">Recurring Deposit is a special kind of Term Deposit offered by banks in India which help people with regular incomes to deposit a fixed amount every month into their Recurring Deposit account and earn interest at the rate applicable to Fixed Deposits. Minimum Period of RD is 6 months and maximum is 10 years.</string>
+    <string name="sip_description">A SIP is a flexible and easy investment plan. Your money is auto-debited from your bank account and invested into a specific mutual fund scheme.You are allocated certain number of units based on the ongoing market rate (called NAV or net asset value) for the day.</string>
+
+    <!-- Quotes Array -->
+    <string-array name="quotes">
+        <item> Beware of little expenses. A small leak will sink a great ship. </item>
+        <item> Your net worth to the world is usually determined by what remains after your bad habits are subtracted from your good ones. </item>
+        <item> The way to become rich is to put all your eggs in one basket and then watch that basket. </item>
+        <item> Watch your finances like a hawk.</item>
+        <item> A wise person should have money in their head, but not in their heart.</item>
+        <item> Formal education will make you a living; self-education will make you a fortune. </item>
+        <item> It is not the man who has too little, but the man who craves more, that is poor. </item>
+        <item> Happiness is not in the mere possession of money; it lies in the joy of achievement, in the thrill of creative effort </item>
+        <item> It’s good to have money and the things that money can buy, but it’s good, too, to check up once in a while and make sure that you haven’t lost the things that money can’t buy. </item>
+        <item> If all the economists were laid end to end, they’d never reach a conclusion. </item>
+        <item> Try to save something while your salary is small; it’s impossible to save after you begin to earn more.  </item>
+        <item> Investing should be more like watching paint dry or watching grass grow. If you want excitement, take $800 and go to Las Vegas. </item>
+    </string-array>
+
+    <!-- Author Array Position Corresponding To Quotes Array -->
+    <string-array name="author">
+        <item> Benjamin Franklin </item>
+        <item> Benjamin Franklin </item>
+        <item> Andrew Carnegie </item>
+        <item> H. Jackson Brown, JR. </item>
+        <item> Jonathan Swift </item>
+        <item> Jim Rohn </item>
+        <item> Seneca </item>
+        <item> Franklin D. Roosevelt </item>
+        <item> George Lorimer </item>
+        <item> George Bernard Shaw </item>
+        <item> Jack Benny </item>
+        <item> Paul Samuelson </item>
+    </string-array>
+
 </resources>

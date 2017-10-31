@@ -39,6 +39,7 @@ public class FDCalculation extends Fragment {
     4  - Yearly
      */
     double progress_value = 7.5;
+    String emptyLiteral = "-";
 
     String rupee = "₹";
 
@@ -97,6 +98,9 @@ public class FDCalculation extends Fragment {
         compoundingOptions.add("YEARLY"); //1
 
         setFont();
+
+        DepositInput.setSelection(DepositInput.getText().length());
+
 
         CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
                 Integer.parseInt(TenureInput.getText().toString().trim()));
@@ -233,6 +237,9 @@ public class FDCalculation extends Fragment {
                     CalculateAndSet(Integer.parseInt(s.toString().trim()),
                             Integer.parseInt(TenureInput.getText().toString().trim()));
 
+                } else {
+                    MVAmount.setText(emptyLiteral);
+                    InterestAmount.setText(emptyLiteral);
                 }
             }
         });
@@ -253,6 +260,9 @@ public class FDCalculation extends Fragment {
                 if(!s.toString().equals("")){
                     CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
                             Integer.parseInt(s.toString().trim()));
+                } else {
+                    MVAmount.setText(emptyLiteral);
+                    InterestAmount.setText(emptyLiteral);
                 }
             }
         });
@@ -262,18 +272,23 @@ public class FDCalculation extends Fragment {
         statsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Statistics.class);
+                if(MVAmount.getText().toString().equals("-")) {
+                    Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getContext(), Statistics.class);
 
-                intent.putExtra("Amount", Float.parseFloat(DepositInput.getText().toString()));
-                intent.putExtra("Rate", progress_value);
-                intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
-                intent.putExtra("Compounding", 0);
-                intent.putExtra("TenureType", returnforMory());
-                intent.putExtra("Calculation", 2);
-                intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
-                intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
+                    intent.putExtra("Amount", Float.parseFloat(DepositInput.getText().toString()));
+                    intent.putExtra("Rate", progress_value);
+                    intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
+                    intent.putExtra("Compounding", 0);
+                    intent.putExtra("TenureType", returnforMory());
+                    intent.putExtra("Calculation", 2);
+                    intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
+                    intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -312,22 +327,23 @@ public class FDCalculation extends Fragment {
 
     public void CalculateAndSet(int amount, int tenure){
 
-        double rate2 = (progress_value) / 100;
-        int n = 4;
-        //converting months to years
-        double ten=0;
-        if(!mory){
-            ten = ((double) tenure)/12;
-        } else {
-            ten = tenure;
+        if(!DepositInput.getText().toString().equals("")) {
+            double rate2 = (progress_value) / 100;
+            int n = 4;
+            //converting months to years
+            double ten = 0;
+            if (!mory) {
+                ten = ((double) tenure) / 12;
+            } else {
+                ten = tenure;
+            }
+
+            double MV = Math.round(amount * (Math.pow(1 + (rate2 / n), n * ten)));
+            MVAmount.setText("" + Math.round(MV));
+            double interest = MV - amount;
+            InterestAmount.setText("" + Math.round(interest));
+
         }
-
-        double MV = Math.round(amount*(Math.pow(1+(rate2/n), n*ten)));
-        MVAmount.setText(""+Math.round(MV));
-        double interest = MV - amount;
-        InterestAmount.setText(""+Math.round(interest));
-
-
 
     }
 }

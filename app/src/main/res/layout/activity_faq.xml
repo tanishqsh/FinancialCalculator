@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:layout_weight="10"
+    tools:context="com.madhouseapps.financialcalculator.FAQActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/FAQTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="34sp"
+            android:textColor="#383838"
+            android:text="FAQs" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="8"
+        android:layout_height="0dp">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:scrollbars="none"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="0dp">
+
+                <TextView
+                    android:id="@+id/EMIQuestionTitle"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/primary_emi"
+                    android:text="What is EMI?"
+                    android:textSize="21sp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/emidescription"
+                    android:textColor="@color/material_black"
+                    android:text="@string/emi_description"
+                    android:textSize="13sp"
+                    android:padding="10dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/FDQuestionTitle"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/primary_fd"
+                    android:text="What is FD?"
+                    android:textSize="21sp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/fddescription"
+                    android:textColor="@color/material_black"
+                    android:text="@string/fd_description"
+                    android:textSize="13sp"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/RDQuestionTitle"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/primary_rd"
+                    android:text="What is RD?"
+                    android:textSize="21sp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/rddescription"
+                    android:textColor="@color/material_black"
+                    android:text="@string/rd_description"
+                    android:textSize="13sp"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/SIPQuestionTitle"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/primary_sip"
+                    android:text="What is SIP?"
+                    android:textSize="21sp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/sipdescription"
+                    android:textColor="@color/material_black"
+                    android:text="@string/sip_description"
+                    android:textSize="13sp"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

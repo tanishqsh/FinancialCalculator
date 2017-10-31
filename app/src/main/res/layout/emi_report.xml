@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:weightSum="11"
+    android:id="@+id/canvas"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:background="@color/primary_emi"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_margin="5dp"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/EMIReport"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="EMI REPORT"
+            android:textColor="#FFFFFF"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="9"
+        android:layout_margin="5dp"
+        android:background="@drawable/emi_report"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/principal"
+            android:layout_width="match_parent"
+            android:text="PRINCIPAL LOAN AMOUNT:  $30000"
+            android:textColor="@color/primary_emi"
+            android:padding="5dp"
+            android:background="@drawable/emi_report"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/interestRate"
+            android:layout_width="match_parent"
+            android:text="INTEREST RATE: 3% Per Annum"
+            android:textColor="@color/primary_emi"
+            android:padding="5dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/emi_report"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tenure"
+            android:layout_width="match_parent"
+            android:text="TENURE: 2 years"
+            android:textColor="@color/primary_emi"
+            android:padding="5dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/emi_report"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/EMI"
+            android:layout_width="match_parent"
+            android:text="EMI: $139"
+            android:textColor="@color/primary_emi"
+            android:padding="5dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/emi_report"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/InterestPayable"
+            android:layout_width="match_parent"
+            android:text="INTEREST PAYABLE: $1000"
+            android:textColor="@color/primary_emi"
+            android:padding="5dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/emi_report"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TotalPayable"
+            android:layout_width="match_parent"
+            android:text="TOTAL PAYABLE: $10000"
+            android:textColor="@color/primary_emi"
+            android:padding="5dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/emi_report"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TipsHead"
+            android:layout_width="match_parent"
+            android:text="TIP FOR LOANS UNDER EMI:"
+            android:textStyle="bold"
+            android:textColor="@color/material_black"
+            android:padding="5dp"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TipsBody"
+            android:layout_width="match_parent"
+            android:text="Most of the loans are sanctioned under floating rate schemes.  Thus  interest rate keeps on changing.  As EMI is a function of the rate of interest, thus whenever there is change in rate of interest, the EMI amount is also likely to change. "
+            android:textColor="@color/material_black"
+            android:padding="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="13sp"
+        android:layout_weight="1"
+        android:textColor="@color/primary_emi"
+        android:gravity="center"
+        android:text="Report Generated By FinCal from MadHouse"
+        android:layout_height="0dp" />
+
+
+</LinearLayout>

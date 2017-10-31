@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class SIPCalculation extends Fragment {
@@ -29,6 +30,7 @@ public class SIPCalculation extends Fragment {
     TextView TenureTitle, TenureOptionsYearly, TenureOptionsMonthly;
     EditText TenureInput;
     Button statsButton;
+    String emptyLiteral = "-";
 
     double progress_value = 12;
     double decimalProgress;
@@ -71,6 +73,8 @@ false for month
         RateChanger.setProgress(120);
 
         setFont();
+
+        DepositInput.setSelection(DepositInput.getText().length());
 
 
         CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
@@ -176,6 +180,9 @@ false for month
                 if(!s.toString().equals("")){
                     CalculateAndSet(Integer.parseInt(s.toString().trim()),
                             Integer.parseInt(TenureInput.getText().toString().trim()));
+                } else {
+                    MVAmount.setText(emptyLiteral);
+                    InterestAmount.setText(emptyLiteral);
                 }
             }
         });
@@ -234,9 +241,11 @@ false for month
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
 
-
                     CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
                             Integer.parseInt(s.toString().trim()));
+                } else {
+                    MVAmount.setText(emptyLiteral);
+                    InterestAmount.setText(emptyLiteral);
                 }
             }
         });
@@ -246,18 +255,23 @@ false for month
         statsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Statistics.class);
+                if(MVAmount.getText().toString().equals("-")) {
+                    Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getContext(), Statistics.class);
 
-                intent.putExtra("Amount", Float.parseFloat(DepositInput.getText().toString()));
-                intent.putExtra("Rate", progress_value);
-                intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
-                intent.putExtra("Compounding", 0);
-                intent.putExtra("TenureType", returnforMory());
-                intent.putExtra("Calculation", 4);
-                intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
-                intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
+                    intent.putExtra("Amount", Float.parseFloat(DepositInput.getText().toString()));
+                    intent.putExtra("Rate", progress_value);
+                    intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
+                    intent.putExtra("Compounding", 0);
+                    intent.putExtra("TenureType", returnforMory());
+                    intent.putExtra("Calculation", 4);
+                    intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
+                    intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -294,29 +308,29 @@ false for month
 
 
     public void CalculateAndSet(int amount, int tenure){
+        if(!DepositInput.getText().toString().equals("")) {
+            if (mory) {
+                tenure = tenure * 12;
+            }
 
-        if(mory){
-            tenure = tenure * 12;
+            double rate2 = (progress_value) / 1200;
+            //getting all the inputs perfectly
+
+            double inte;
+
+            double MV = amount;
+            double inte_sum = 0;
+            for (int i = 0; i < tenure; i++) {
+                inte = MV * rate2;
+                MV = MV + inte;
+                inte_sum = inte_sum + inte;
+                MVAmount.setText(String.valueOf(Math.round(MV)));
+                InterestAmount.setText(String.valueOf(Math.round(inte_sum)));
+                MV = MV + amount;
+
+            }
+
         }
-
-        double rate2 = (progress_value) / 1200;
-        //getting all the inputs perfectly
-
-        double inte;
-
-        double MV = amount;
-        double inte_sum = 0;
-        for(int i=0; i<tenure; i++){
-            inte = MV * rate2;
-            MV = MV + inte;
-            inte_sum = inte_sum + inte;
-            MVAmount.setText(String.valueOf(Math.round(MV)));
-            InterestAmount.setText(String.valueOf(Math.round(inte_sum)));
-            MV = MV + amount;
-
-        }
-
-
 
     }
 }

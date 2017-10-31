@@ -88,9 +88,10 @@ public class Statistics extends AppCompatActivity {
     public void drawEMIGraph(){
 
         if(tenure_type==1){
-            tableArea.addView(new TableRow(this, "Month", "Principle", "Balance"));
+            tableArea.addView(new TableRow(this, "Month", "Principal", "Interest", "Balance"));
         } else {
-            tableArea.addView(new TableRow(this, "Month", "Principle", "Balance"));
+            tableArea.addView(new TableRow(this, "Month", "Principal", "Interest", "Balance"));
+
         }
 
 
@@ -140,10 +141,11 @@ public class Statistics extends AppCompatActivity {
         rate = rate / 100;
         for(int i=0; i<tenure; i++){
             //double P = (rate*(amount)) / (1-(Math.pow((1+rate), -1*tenure)));
-            double I = (fullReturn * rate)/12;
+            double I = (amount * rate)/12;
             double P = emi - I;
+            amount = (float) (amount - P);
             fullReturn = fullReturn-emi;
-            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(P), ""+Math.round(fullReturn)));
+            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(P), ""+Math.round(I),""+Math.round(fullReturn)));
 
         }
 
@@ -291,7 +293,7 @@ public class Statistics extends AppCompatActivity {
 
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
         yvalues.add(new PieEntry(amount*tenure, "Amount"));
-        yvalues.add(new PieEntry(interest, "Interest"));
+        yvalues.add(new PieEntry(interest, "Return"));
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(getResources().getColor(R.color.primary_sip));

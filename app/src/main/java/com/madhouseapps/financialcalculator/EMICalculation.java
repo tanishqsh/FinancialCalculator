@@ -32,6 +32,7 @@ public class EMICalculation extends Fragment {
     boolean mory = true;
 
     String rupee = "₹";
+    String emptyLiteral = "-";
     String rupeeCode;
     double progress_value=10;
     double decimalProgress;
@@ -41,7 +42,7 @@ public class EMICalculation extends Fragment {
     TextView emiTitle, interestTitle, interestAmount, totalTitle, totalAmount, loanTitle, rateTitle;
     EditText tenureInput, loanInput;
     EditText ratePercent;
-    Button statsButton;
+    Button statsButton, shareButton;
     SeekBar rateChanger;
 
     TextWatcher textWatcher;
@@ -73,10 +74,12 @@ public class EMICalculation extends Fragment {
         tenureOptionsMonthly = (TextView) view.findViewById(R.id.TenureOptionsMonthly);
         statsButton = (Button) view.findViewById(R.id.statsButton);
         rateChanger = (SeekBar) view.findViewById(R.id.RateChanger);
+        shareButton = (Button) view.findViewById(R.id.ShareButton);
         rateChanger.setProgress(100);
 
         rupeeCode = getResources().getString(R.string.rupee);
 
+        loanInput.setSelection(loanInput.getText().length());
 
         Typeface poppins_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/poppinsb.ttf");
 
@@ -96,6 +99,7 @@ public class EMICalculation extends Fragment {
         tenureOptionsYearly.setTypeface(poppins_bold);
         tenureOptionsMonthly.setTypeface(poppins_bold);
         statsButton.setTypeface(poppins_bold);
+        shareButton.setTypeface(poppins_bold);
 
         CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
                 mory,
@@ -236,6 +240,10 @@ public class EMICalculation extends Fragment {
                     CalculateAndSet(Integer.parseInt(s.toString().trim()),
                             mory,
                             Integer.parseInt(tenureInput.getText().toString().trim()));
+                }else {
+                    emiAmount.setText(emptyLiteral);
+                    interestAmount.setText(emptyLiteral);
+                    totalAmount.setText(emptyLiteral);
                 }
 
             }
@@ -261,6 +269,10 @@ public class EMICalculation extends Fragment {
                     CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
                             mory,
                             Integer.parseInt(s.toString().trim()));
+                } else {
+                    emiAmount.setText(emptyLiteral);
+                    interestAmount.setText(emptyLiteral);
+                    totalAmount.setText(emptyLiteral);
                 }
             }
         });
@@ -271,22 +283,48 @@ public class EMICalculation extends Fragment {
         statsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Statistics.class);
 
-                intent.putExtra("Amount", Float.parseFloat(loanInput.getText().toString()));
-                intent.putExtra("Rate", progress_value);
-                intent.putExtra("Tenure", Integer.parseInt(tenureInput.getText().toString()));
-                intent.putExtra("Compounding", 0);
-                intent.putExtra("TenureType", returnforMory());
-                intent.putExtra("Calculation", 1);
-                intent.putExtra("EMI", Float.parseFloat(emiAmount.getText().toString()));
-                intent.putExtra("Interest", Float.parseFloat(interestAmount.getText().toString()));
+                if(emiAmount.getText().toString().equals("-")){
+                    Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getContext(), Statistics.class);
 
-                startActivity(intent);
+                    intent.putExtra("Amount", Float.parseFloat(loanInput.getText().toString()));
+                    intent.putExtra("Rate", progress_value);
+                    intent.putExtra("Tenure", Integer.parseInt(tenureInput.getText().toString()));
+                    intent.putExtra("Compounding", 0);
+                    intent.putExtra("TenureType", returnforMory());
+                    intent.putExtra("Calculation", 1);
+                    intent.putExtra("EMI", Float.parseFloat(emiAmount.getText().toString()));
+                    intent.putExtra("Interest", Float.parseFloat(interestAmount.getText().toString()));
+
+                    startActivity(intent);
+                }
+
             }
         });
 
 
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(emiAmount.getText().toString().equals("-")){
+                    Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Intent intent = new Intent(getContext(), EMIReport.class);
+                    intent.putExtra("PRINCIPAL", loanInput.getText().toString());
+                    intent.putExtra("INTERESTRATE", String.valueOf(progress_value));
+                    intent.putExtra("TENURE", tenureInput.getText().toString());
+                    intent.putExtra("TOTALPAYABLE", totalAmount.getText().toString());
+                    intent.putExtra("EMI", emiAmount.getText().toString());
+                    intent.putExtra("TenureType", returnforMory());
+                    intent.putExtra("INTEREST", interestAmount.getText().toString());
+
+                    startActivity(intent);
+                }
+            }
+        });
 
         return view;
     }
@@ -302,17 +340,18 @@ public class EMICalculation extends Fragment {
     @SuppressLint("SetTextI18n")
     public void CalculateAndSet(double amount, boolean mory, int tenure){
 
-        double pV = (progress_value/12)/100;
-        if (mory) {
-            tenure = tenure*12;
+        if(!loanInput.getText().toString().equals("")) {
+            double pV = (progress_value / 12) / 100;
+            if (mory) {
+                tenure = tenure * 12;
+            }
+
+
+            double emi = (amount * pV * Math.pow(1 + pV, tenure)) / ((Math.pow((1 + pV), tenure)) - 1);
+            emiAmount.setText("" + Math.round(emi));
+            totalAmount.setText("" + (Math.round(emi * tenure)));
+            interestAmount.setText("" + ((Math.round((emi * tenure))) - (Integer.parseInt(loanInput.getText().toString()))));
         }
-
-
-        double emi= (amount*pV*Math.pow(1+pV,tenure))/((Math.pow((1+pV),tenure))-1);
-        emiAmount.setText(""+Math.round(emi));
-        totalAmount.setText(""+(Math.round(emi*tenure)));
-        interestAmount.setText(""+((Math.round((emi*tenure)))-(Integer.parseInt(loanInput.getText().toString()))));
-
 
     }
 

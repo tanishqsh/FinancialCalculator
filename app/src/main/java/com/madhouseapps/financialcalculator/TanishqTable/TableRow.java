@@ -19,4 +19,14 @@ public class TableRow extends LinearLayout {
         this.addView(new TableTextView(getContext(), 3, text2));
         this.addView(new TableTextView(getContext(), 3, text3));
     }
+
+    public TableRow(Context context, String month, String principal, String interest, String balance) {
+        super(context);
+        this.setWeightSum(12f);
+        this.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        this.addView(new TableTextView(getContext(), 3, month));
+        this.addView(new TableTextView(getContext(), 3, principal));
+        this.addView(new TableTextView(getContext(), 3, interest));
+        this.addView(new TableTextView(getContext(), 3, balance));
+    }
 }

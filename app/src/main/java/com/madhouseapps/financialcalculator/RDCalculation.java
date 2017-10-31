@@ -34,6 +34,7 @@ public class RDCalculation extends Fragment {
     TextView TenureTitle, TenureOptionsYearly, TenureOptionsMonthly;
     EditText TenureInput;
     Button statsButton;
+    String emptyLiteral = "-";
 
     double progress_value = 8;
     double decimalProgress;
@@ -76,6 +77,8 @@ public class RDCalculation extends Fragment {
         RateChanger.setProgress(80);
 
         setFont();
+
+        DepositInput.setSelection(DepositInput.getText().length());
 
         CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
                 Integer.parseInt(TenureInput.getText().toString().trim()));
@@ -175,6 +178,9 @@ public class RDCalculation extends Fragment {
                 if(!s.toString().equals("")){
                     CalculateAndSet(Integer.parseInt(s.toString().trim()),
                             Integer.parseInt(TenureInput.getText().toString().trim()));
+                } else {
+                    MVAmount.setText(emptyLiteral);
+                    InterestAmount.setText(emptyLiteral);
                 }
             }
         });
@@ -236,6 +242,9 @@ public class RDCalculation extends Fragment {
 
                     CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
                             Integer.parseInt(s.toString().trim()));
+                } else {
+                    MVAmount.setText(emptyLiteral);
+                    InterestAmount.setText(emptyLiteral);
                 }
             }
         });
@@ -245,18 +254,24 @@ public class RDCalculation extends Fragment {
         statsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Statistics.class);
 
-                intent.putExtra("Amount", Float.parseFloat(DepositInput.getText().toString()));
-                intent.putExtra("Rate", progress_value);
-                intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
-                intent.putExtra("Compounding", 0);
-                intent.putExtra("TenureType", returnforMory());
-                intent.putExtra("Calculation", 3);
-                intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
-                intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
+                if(MVAmount.getText().toString().equals("-")) {
+                    Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getContext(), Statistics.class);
 
-                startActivity(intent);
+                    intent.putExtra("Amount", Float.parseFloat(DepositInput.getText().toString()));
+                    intent.putExtra("Rate", progress_value);
+                    intent.putExtra("Tenure", Integer.parseInt(TenureInput.getText().toString()));
+                    intent.putExtra("Compounding", 0);
+                    intent.putExtra("TenureType", returnforMory());
+                    intent.putExtra("Calculation", 3);
+                    intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
+                    intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
+
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -291,43 +306,44 @@ public class RDCalculation extends Fragment {
     }
 
 
-    public void CalculateAndSet(int amount, int tenure){
+    public void CalculateAndSet(int amount, int tenure) {
+        if (!DepositInput.getText().toString().equals("")) {
+
+            if (mory) {
+                tenure = tenure * 12;
+            } else {
+                //do nothing
+            }
 
 
-        if(mory){
-            tenure = tenure * 12;
-        } else {
-            //do nothing
-        }
+            double rate2 = (progress_value) / 400;
+            double local_tenure = tenure;
+            double year_tenure;
 
+            //getting all the inputs perfectly
 
-        double rate2 = (progress_value) / 400;
-        double local_tenure = tenure;
-        double year_tenure;
-
-        //getting all the inputs perfectly
-
-        double MV=0;
-        double amt;
+            double MV = 0;
+            double amt;
 
         /*
 
         For RD, we have to calculate Maturity of each month and then add them.
 
          */
-        for(int i=0; i<tenure; i++){
+            for (int i = 0; i < tenure; i++) {
 
-            year_tenure = local_tenure / 12;
-            amt = amount * Math.pow((1 + rate2), 4*year_tenure);
-            MV = MV + amt;
-            local_tenure = local_tenure - 1;
+                year_tenure = local_tenure / 12;
+                amt = amount * Math.pow((1 + rate2), 4 * year_tenure);
+                MV = MV + amt;
+                local_tenure = local_tenure - 1;
+
+            }
+
+            double interest = MV - (amount * tenure);
+
+            MVAmount.setText("" + Math.round(MV));
+            InterestAmount.setText("" + Math.round(interest));
 
         }
-
-        double interest = MV - (amount*tenure);
-
-        MVAmount.setText(""+Math.round(MV));
-        InterestAmount.setText(""+Math.round(interest));
-
     }
 }
