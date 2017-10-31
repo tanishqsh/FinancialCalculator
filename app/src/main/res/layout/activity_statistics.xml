@@ -19,17 +19,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="5"
+        android:padding="10dp"
+        android:orientation="vertical"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/tableHead"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
         <ScrollView
 
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/tableArea"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
             </LinearLayout>
 

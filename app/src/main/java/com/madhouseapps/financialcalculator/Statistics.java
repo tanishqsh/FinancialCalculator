@@ -36,7 +36,7 @@ public class Statistics extends AppCompatActivity {
     Typeface poppins_bold;
 
     Description desc;
-    LinearLayout tableArea;
+    LinearLayout tableArea, tableHead;
 
 
 
@@ -50,6 +50,7 @@ public class Statistics extends AppCompatActivity {
         poppins_bold = Typeface.createFromAsset(getAssets(), "fonts/poppinsb.ttf");
 
         tableArea = (LinearLayout) findViewById(R.id.tableArea);
+        tableHead = (LinearLayout) findViewById(R.id.tableHead);
 
         Intent intent = getIntent();
         rate = intent.getDoubleExtra("Rate", 1);
@@ -88,9 +89,9 @@ public class Statistics extends AppCompatActivity {
     public void drawEMIGraph(){
 
         if(tenure_type==1){
-            tableArea.addView(new TableRow(this, "Month", "Principal", "Interest", "Balance"));
+            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Balance"));
         } else {
-            tableArea.addView(new TableRow(this, "Month", "Principal", "Interest", "Balance"));
+            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Balance"));
 
         }
 
@@ -156,9 +157,9 @@ public class Statistics extends AppCompatActivity {
     public void drawFDGraph(){
 
         if(tenure_type==1){
-            tableArea.addView(new TableRow(this, "Year", "Interest", "Value"));
+            tableHead.addView(new TableRow(this, "Year", "Interest", "Value"));
         } else {
-            tableArea.addView(new TableRow(this, "Month", "Interest", "Value"));
+            tableHead.addView(new TableRow(this, "Month", "Interest", "Value"));
         }
 
 
@@ -211,9 +212,9 @@ public class Statistics extends AppCompatActivity {
     //rdgraph
     public void drawRDGraph(){
         if(tenure_type==1){
-            tableArea.addView(new TableRow(this, "Month", "Interest", "Value"));
+            tableHead.addView(new TableRow(this, "Month", "Interest", "Value"));
         } else {
-            tableArea.addView(new TableRow(this, "Month", "Interest", "Value"));
+            tableHead.addView(new TableRow(this, "Month", "Interest", "Value"));
         }
 
         if(tenure_type==1){
@@ -282,9 +283,9 @@ public class Statistics extends AppCompatActivity {
     public void drawSIPGraph(){
 
         if(tenure_type==1){
-            tableArea.addView(new TableRow(this, "Month", "Return", "Value"));
+            tableHead.addView(new TableRow(this, "Month", "Return", "Value"));
         } else {
-            tableArea.addView(new TableRow(this, "Month", "Return", "Value"));
+            tableHead.addView(new TableRow(this, "Month", "Return", "Value"));
         }
 
         if(tenure_type==1){
