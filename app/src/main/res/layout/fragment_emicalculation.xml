@@ -424,7 +424,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:textColor="@color/primary_emi"
-                android:text="Share"
+                android:text="Share Report"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/share_emi"
                 android:layout_height="wrap_content" />

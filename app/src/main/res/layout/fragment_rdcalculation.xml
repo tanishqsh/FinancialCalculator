@@ -361,6 +361,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_weight="1"
+            android:padding="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
             android:gravity="center|bottom"
             android:layout_height="match_parent">
 
@@ -368,12 +371,27 @@
                 android:id="@+id/statsButton"
                 android:layout_width="300dp"
                 android:textSize="15sp"
+                android:layout_weight="1"
                 android:textColor="#FFFFFF"
+                android:layout_margin="5dp"
                 android:text="Statistics"
                 android:layout_marginBottom="5dp"
                 style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/greenbutton"
                 android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/ShareButton"
+                android:layout_width="300dp"
+                android:textSize="15sp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:textColor="@color/primary_rd"
+                android:text="Share Report"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/share_rd"
+                android:layout_height="wrap_content" />
+
 
         </LinearLayout>
 

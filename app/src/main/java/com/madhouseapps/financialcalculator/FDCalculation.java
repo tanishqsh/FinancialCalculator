@@ -4,21 +4,21 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.madhouseapps.financialcalculator.ReportGeneration.EMIReport;
+import com.madhouseapps.financialcalculator.ReportGeneration.FDReport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class FDCalculation extends Fragment {
     EditText TenureInput;
     TextView CompoundingTitle;
     Spinner CompoundingOptions;
-    Button statsButton;
+    Button statsButton, shareButton;
 
     double decimalProgress;
 
@@ -83,6 +83,8 @@ public class FDCalculation extends Fragment {
         TenureTitle = (TextView) rootView.findViewById(R.id.TenureTitle);
         TenureOptionsMonthly = (TextView) rootView.findViewById(R.id.TenureOptionsMonthly);
         TenureOptionsYearly = (TextView) rootView.findViewById(R.id.TenureOptionsYearly);
+        shareButton = (Button) rootView.findViewById(R.id.ShareButton);
+
 
         DepositInput = (EditText) rootView.findViewById(R.id.DepositInput);
         TenureInput = (EditText) rootView.findViewById(R.id.TenureInput);
@@ -292,6 +294,25 @@ public class FDCalculation extends Fragment {
             }
         });
 
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MVAmount.getText().toString().equals("-")){
+                    Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getContext(), FDReport.class);
+                    intent.putExtra("DEPOSIT", DepositInput.getText().toString());
+                    intent.putExtra("INTERESTRATE", String.valueOf(progress_value));
+                    intent.putExtra("TENURE", TenureInput.getText().toString());
+                    intent.putExtra("MV", MVAmount.getText().toString());
+                    intent.putExtra("TenureType", returnforMory());
+                    intent.putExtra("INTEREST", InterestAmount.getText().toString());
+                    intent.putExtra("Category", 2);
+                    startActivity(intent);
+                }
+            }
+        });
+
         return rootView;
     }
 
@@ -321,6 +342,7 @@ public class FDCalculation extends Fragment {
         TenureInput.setTypeface(poppins_bold);
         statsButton.setTypeface(poppins_bold);
         DepositInput.setTypeface(poppins_bold);
+        shareButton.setTypeface(poppins_bold);
 
     }
 

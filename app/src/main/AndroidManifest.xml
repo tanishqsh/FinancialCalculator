@@ -33,7 +33,13 @@
         <activity
             android:name=".FAQActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".EMIReport"></activity>
+        <activity android:name=".ReportGeneration.EMIReport"></activity>
+        <activity android:name=".ReportGeneration.FDReport"></activity>
+        <activity android:name=".ReportGeneration.RDReport"></activity>
+        <activity android:name=".ReportGeneration.SIPReport"></activity>
+
+
+
     </application>
 
 </manifest>

@@ -8,9 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +18,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.madhouseapps.financialcalculator.Helper.InputFilterMinMax;
+import com.madhouseapps.financialcalculator.ReportGeneration.EMIReport;
 
 
 public class EMICalculation extends Fragment {
@@ -311,7 +309,6 @@ public class EMICalculation extends Fragment {
                 if(emiAmount.getText().toString().equals("-")){
                     Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
                 } else {
-
                     Intent intent = new Intent(getContext(), EMIReport.class);
                     intent.putExtra("PRINCIPAL", loanInput.getText().toString());
                     intent.putExtra("INTERESTRATE", String.valueOf(progress_value));
@@ -320,7 +317,7 @@ public class EMICalculation extends Fragment {
                     intent.putExtra("EMI", emiAmount.getText().toString());
                     intent.putExtra("TenureType", returnforMory());
                     intent.putExtra("INTEREST", interestAmount.getText().toString());
-
+                    intent.putExtra("Category", 1);
                     startActivity(intent);
                 }
             }

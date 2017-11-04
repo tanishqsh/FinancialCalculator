@@ -1,4 +1,4 @@
-package com.madhouseapps.financialcalculator;
+package com.madhouseapps.financialcalculator.ReportGeneration;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,11 +10,11 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -23,21 +23,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.madhouseapps.financialcalculator.R;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class EMIReport extends AppCompatActivity implements ViewTreeObserver.OnGlobalLayoutListener {
+public class FDReport extends AppCompatActivity implements ViewTreeObserver.OnGlobalLayoutListener {
 
-    String principal, emi, interest, interestRate, totalPayable, tenure;
-    TextView principalView, emiView, interestView, interestRateView, totalPayableView, tenureView;
+    String deposit, fd, interest, interestRate, totalReturn, tenure, MV;
+    TextView depositView, MVView, interestView, interestRateView, totalReturnView, tenureView;
     LinearLayout canvas;
+    int category;
     int mory;
 
     final int PERMISSION_CODE = 13;
     String absPath = "";
     int height;
     int width;
+
+    String rupee;
 
 
     @SuppressLint("SetTextI18n")
@@ -46,42 +51,48 @@ public class EMIReport extends AppCompatActivity implements ViewTreeObserver.OnG
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.emi_report);
+        setContentView(R.layout.fd_report);
 
-        Intent intent = getIntent();
-        principal = intent.getStringExtra("PRINCIPAL");
-        emi = intent.getStringExtra("EMI");
-        interest = intent.getStringExtra("INTEREST");
-        interestRate = intent.getStringExtra("INTERESTRATE");
-        totalPayable = intent.getStringExtra("TOTALPAYABLE");
-        tenure = intent.getStringExtra("TENURE");
-        mory = intent.getIntExtra("TenureType", 0);
+        rupee = getResources().getString(R.string.rupee);
 
-        String rupee = getResources().getString(R.string.rupee);
-
-        principalView = (TextView) findViewById(R.id.principal);
-        emiView = (TextView) findViewById(R.id.EMI);
-        interestView = (TextView) findViewById(R.id.InterestPayable);
+        depositView = (TextView) findViewById(R.id.Deposit);
+        MVView = (TextView) findViewById(R.id.MV);
+        interestView = (TextView) findViewById(R.id.InterestEarned);
         interestRateView = (TextView) findViewById(R.id.interestRate);
-        totalPayableView = (TextView) findViewById(R.id.TotalPayable);
+        totalReturnView = (TextView) findViewById(R.id.TotalReturn);
         tenureView = (TextView) findViewById(R.id.tenure);
         canvas = (LinearLayout) findViewById(R.id.canvas);
 
-        principalView.setText("PRINCIPAL LOAN AMOUNT: "+rupee+" "+principal);
-        emiView.setText("EMI:  "+rupee+" "+emi);
+
+        Intent intent = getIntent();
+        deposit = intent.getStringExtra("DEPOSIT");
+        MV = intent.getStringExtra("MV");
+        interest = intent.getStringExtra("INTEREST");
+        interestRate = intent.getStringExtra("INTERESTRATE");
+        tenure = intent.getStringExtra("TENURE");
+        mory = intent.getIntExtra("TenureType", 0);
+        category = intent.getIntExtra("Category", 1);
+
+       FD_Report();
+    }
+
+    private void FD_Report(){
+
+        depositView.setText("FIXED DEPOSIT: "+rupee+" "+deposit);
+        MVView.setText("MATURITY VALUE:  "+rupee+" "+MV);
         interestRateView.setText("INTEREST RATE:  "+interestRate+"% p.a");
-        interestView.setText("INTEREST: "+rupee+" "+interest);
+        interestView.setText("INTEREST EARNED: "+rupee+" "+interest);
 
         if(mory==1){
             tenureView.setText("TENURE:  "+tenure+" years");
         } else {
             tenureView.setText("TENURE:  "+tenure+" months");
         }
-        totalPayableView.setText("TOTAL PAYABLE: "+rupee+" "+totalPayable);
+        totalReturnView.setVisibility(View.GONE);
 
-       canvas.getViewTreeObserver().addOnGlobalLayoutListener(this);
-
+        canvas.getViewTreeObserver().addOnGlobalLayoutListener(this);
     }
+
 
     @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
@@ -140,11 +151,11 @@ public class EMIReport extends AppCompatActivity implements ViewTreeObserver.OnG
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "This EMI Report was generated Using FinCal https://play.google.com/store/apps/details?id=com.madhouseapps.financialcalculator");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "This Fixed Deposit Report was generated Using FinCal https://play.google.com/store/apps/details?id=com.madhouseapps.financialcalculator");
                 shareIntent.setType("image/*");
                 // Launch sharing dialog for image
                 startActivity(Intent.createChooser(shareIntent, "Share Image"));
-                Toast.makeText(this, "Report Saved To The Device.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "FD Report Saved To The Device.", Toast.LENGTH_SHORT).show();
                 finish();
 
             } else {

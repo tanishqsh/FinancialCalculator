@@ -5,9 +5,11 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -37,6 +39,7 @@ public class Statistics extends AppCompatActivity {
 
     Description desc;
     LinearLayout tableArea, tableHead;
+    LinearLayout linearViewOfTable;
 
 
 
@@ -51,6 +54,7 @@ public class Statistics extends AppCompatActivity {
 
         tableArea = (LinearLayout) findViewById(R.id.tableArea);
         tableHead = (LinearLayout) findViewById(R.id.tableHead);
+        linearViewOfTable  = (LinearLayout) findViewById(R.id.linearViewOfTable);
 
         Intent intent = getIntent();
         rate = intent.getDoubleExtra("Rate", 1);
@@ -156,13 +160,19 @@ public class Statistics extends AppCompatActivity {
     //fdgraph
     public void drawFDGraph(){
 
+        /**
         if(tenure_type==1){
             tableHead.addView(new TableRow(this, "Year", "Interest", "Value"));
         } else {
             tableHead.addView(new TableRow(this, "Month", "Interest", "Value"));
         }
+         **/
 
-
+        TextView fdwarning = new TextView(this);
+        fdwarning.setText(R.string.fd_stats_warning);
+        fdwarning.setTypeface(poppins_bold);
+        fdwarning.setTextColor(getResources().getColor(R.color.primary_fd));
+        linearViewOfTable.addView(fdwarning);
 
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
         yvalues.add(new PieEntry(amount, "Amount"));
@@ -191,21 +201,23 @@ public class Statistics extends AppCompatActivity {
         chart.setDescription(desc);
         chart.getLegend().setTextColor(Color.WHITE);
 
+        /**
         //change between yearly
         if(tenure_type==1){
-            rate = rate / 100;
+            rate = rate / 400;
+            
         } else {
             rate = rate / 1200;
+            double sum_inte=0;
+            for(int i=0; i<tenure; i++){
+                double inte = (rate) * amount;
+                sum_inte = sum_inte + inte;
+                amount = (float) (amount + inte);
+                tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(inte), ""+Math.round(amount)));
+            }
         }
-        double sum_inte=0;
 
-        for(int i=0; i<tenure; i++){
-            double inte = (rate) * amount;
-            sum_inte = sum_inte + inte;
-            amount = (float) (amount + inte);
-            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(inte), ""+Math.round(amount)));
-        }
-
+         **/
 
     }
 

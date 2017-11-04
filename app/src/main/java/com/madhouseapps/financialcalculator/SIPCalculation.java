@@ -18,6 +18,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.madhouseapps.financialcalculator.ReportGeneration.RDReport;
+import com.madhouseapps.financialcalculator.ReportGeneration.SIPReport;
+
 
 public class SIPCalculation extends Fragment {
 
@@ -29,7 +32,7 @@ public class SIPCalculation extends Fragment {
     SeekBar RateChanger;
     TextView TenureTitle, TenureOptionsYearly, TenureOptionsMonthly;
     EditText TenureInput;
-    Button statsButton;
+    Button statsButton, shareButton;
     String emptyLiteral = "-";
 
     double progress_value = 12;
@@ -58,7 +61,7 @@ false for month
         MVAmount = (TextView) rootView.findViewById(R.id.MVAmount);
         InterestTitle = (TextView) rootView.findViewById(R.id.InterestTitle);
         InterestAmount = (TextView) rootView.findViewById(R.id.InterestAmount);
-
+        shareButton = (Button) rootView.findViewById(R.id.ShareButton);
         DepositTitle = (TextView) rootView.findViewById(R.id.DepositTitle);
         RateTitle = (TextView) rootView.findViewById(R.id.RateTitle);
         RatePercent = (TextView) rootView.findViewById(R.id.RatePercent);
@@ -268,12 +271,32 @@ false for month
                     intent.putExtra("Calculation", 4);
                     intent.putExtra("MV", Float.parseFloat(MVAmount.getText().toString()));
                     intent.putExtra("Interest", Float.parseFloat(InterestAmount.getText().toString()));
-
+                    intent.putExtra("Category", 4);
                     startActivity(intent);
                 }
 
             }
         });
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MVAmount.getText().toString().equals("-")){
+                    Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getContext(), SIPReport.class);
+                    intent.putExtra("DEPOSIT", DepositInput.getText().toString());
+                    intent.putExtra("INTERESTRATE", String.valueOf(progress_value));
+                    intent.putExtra("TENURE", TenureInput.getText().toString());
+                    intent.putExtra("MV", MVAmount.getText().toString());
+                    intent.putExtra("TenureType", returnforMory());
+                    intent.putExtra("INTEREST", InterestAmount.getText().toString());
+                    intent.putExtra("Category", 2);
+                    startActivity(intent);
+                }
+            }
+        });
+
 
         return rootView;
     }
@@ -303,6 +326,7 @@ false for month
         TenureInput.setTypeface(poppins_bold);
         statsButton.setTypeface(poppins_bold);
         DepositInput.setTypeface(poppins_bold);
+        shareButton.setTypeface(poppins_bold);
 
     }
 
