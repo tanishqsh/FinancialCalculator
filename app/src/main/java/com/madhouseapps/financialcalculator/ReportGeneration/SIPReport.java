@@ -73,15 +73,15 @@ public class SIPReport extends AppCompatActivity implements ViewTreeObserver.OnG
         mory = intent.getIntExtra("TenureType", 0);
         category = intent.getIntExtra("Category", 1);
 
-       RD_Report();
+       SIP_Report();
     }
 
-    private void RD_Report(){
+    private void SIP_Report(){
 
-        depositView.setText("FIXED DEPOSIT: "+rupee+" "+deposit);
+        depositView.setText("SIP : "+rupee+" "+deposit);
         MVView.setText("MATURITY VALUE:  "+rupee+" "+MV);
-        interestRateView.setText("INTEREST RATE:  "+interestRate+"% p.a");
-        interestView.setText("INTEREST EARNED: "+rupee+" "+interest);
+        interestRateView.setText("EXPECTED RATE:  "+interestRate+"% p.a");
+        interestView.setText("RETURN: "+rupee+" "+interest);
 
         if(mory==1){
             tenureView.setText("TENURE:  "+tenure+" years");
@@ -100,10 +100,10 @@ public class SIPReport extends AppCompatActivity implements ViewTreeObserver.OnG
 
         // Ensure you call it only once :
         if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            canvas.getViewTreeObserver().removeOnGlobalLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) this);
+            canvas.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
         else {
-            canvas.getViewTreeObserver().removeGlobalOnLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) this);
+            canvas.getViewTreeObserver().removeGlobalOnLayoutListener(this);
         }
 
         // Here you can get the size :)

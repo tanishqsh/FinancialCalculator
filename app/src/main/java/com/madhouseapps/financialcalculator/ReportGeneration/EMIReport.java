@@ -101,10 +101,10 @@ public class EMIReport extends AppCompatActivity implements ViewTreeObserver.OnG
 
         // Ensure you call it only once :
         if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            canvas.getViewTreeObserver().removeOnGlobalLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) this);
+            canvas.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
         else {
-            canvas.getViewTreeObserver().removeGlobalOnLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) this);
+            canvas.getViewTreeObserver().removeGlobalOnLayoutListener(this);
         }
 
         // Here you can get the size :)

@@ -40,7 +40,7 @@
         <TextView
             android:id="@+id/Deposit"
             android:layout_width="match_parent"
-            android:text="FIXED DEPOSIT:  $30000"
+            android:text="MONTHLY DEPOSIT:  $30000"
             android:textColor="@color/primary_sip"
             android:padding="5dp"
             android:background="@drawable/sip_report"

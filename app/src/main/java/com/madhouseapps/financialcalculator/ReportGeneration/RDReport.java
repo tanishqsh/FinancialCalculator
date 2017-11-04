@@ -78,7 +78,7 @@ public class RDReport extends AppCompatActivity implements ViewTreeObserver.OnGl
 
     private void RD_Report(){
 
-        depositView.setText("FIXED DEPOSIT: "+rupee+" "+deposit);
+        depositView.setText("RECURRING DEPOSIT: "+rupee+" "+deposit);
         MVView.setText("MATURITY VALUE:  "+rupee+" "+MV);
         interestRateView.setText("INTEREST RATE:  "+interestRate+"% p.a");
         interestView.setText("INTEREST EARNED: "+rupee+" "+interest);
@@ -100,10 +100,10 @@ public class RDReport extends AppCompatActivity implements ViewTreeObserver.OnGl
 
         // Ensure you call it only once :
         if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            canvas.getViewTreeObserver().removeOnGlobalLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) this);
+            canvas.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
         else {
-            canvas.getViewTreeObserver().removeGlobalOnLayoutListener((ViewTreeObserver.OnGlobalLayoutListener) this);
+            canvas.getViewTreeObserver().removeGlobalOnLayoutListener(this);
         }
 
         // Here you can get the size :)
