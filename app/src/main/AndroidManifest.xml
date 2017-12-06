@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.madhouseapps.financialcalculator">
 
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -37,6 +36,8 @@
         <activity android:name=".ReportGeneration.FDReport"></activity>
         <activity android:name=".ReportGeneration.RDReport"></activity>
         <activity android:name=".ReportGeneration.SIPReport"></activity>
+        <activity android:name=".ReportGeneration.RPReport"></activity>
+
 
 
 

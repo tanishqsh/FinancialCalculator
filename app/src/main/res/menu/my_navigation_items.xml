@@ -17,4 +17,8 @@
         android:title="●"
         android:icon="@drawable/sipnav"
         />
+    <item android:id="@+id/action_retirement"
+        android:title="●"
+        android:icon="@drawable/rpnav"
+        />
 </menu>

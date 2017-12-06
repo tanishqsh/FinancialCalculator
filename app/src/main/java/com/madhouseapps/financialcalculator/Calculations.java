@@ -89,10 +89,19 @@ public class Calculations extends AppCompatActivity {
                 this.getResources().getColor(R.color.primary_sip)
         };
 
+        int[] RPcolors = new int[] {
+                this.getResources().getColor(R.color.primary_rp),
+                Color.parseColor("#383838"),
+                Color.parseColor("#383838"),
+                Color.parseColor("#383838"),
+                this.getResources().getColor(R.color.primary_rp)
+        };
+
         final ColorStateList emiList = new ColorStateList(states, EMIcolors);
         final ColorStateList fdList = new ColorStateList(states, FDcolors);
         final ColorStateList rdList = new ColorStateList(states, RDcolors);
         final ColorStateList sipList = new ColorStateList(states, SIPcolors);
+        final ColorStateList rpList = new ColorStateList(states, RPcolors);
 
         /*
         Nav color fix ENDS
@@ -131,6 +140,12 @@ public class Calculations extends AppCompatActivity {
                 navigationView.getMenu().getItem(0).setChecked(false);
                 navigationView.getMenu().getItem(3).setChecked(true);
                 break;
+            case 5:
+                mViewPager.setCurrentItem(4);
+                navigationView.setItemIconTintList(sipList);
+                navigationView.getMenu().getItem(0).setChecked(false);
+                navigationView.getMenu().getItem(4).setChecked(true);
+                break;
         }
 
 
@@ -157,7 +172,10 @@ public class Calculations extends AppCompatActivity {
                             case R.id.action_sip:
                                 mViewPager.setCurrentItem(3);
                                 navigationView.setItemIconTintList(sipList);
-
+                                break;
+                            case R.id.action_retirement:
+                                mViewPager.setCurrentItem(4);
+                                navigationView.setItemIconTintList(rpList);
                                 break;
                         }
                         return false;
@@ -185,6 +203,9 @@ public class Calculations extends AppCompatActivity {
                         break;
                     case 3:
                         navigationView.setItemIconTintList(sipList);
+                        break;
+                    case 4:
+                        navigationView.setItemIconTintList(rpList);
                         break;
                     default:
                         navigationView.setItemIconTintList(rdList);
@@ -228,6 +249,7 @@ public class Calculations extends AppCompatActivity {
                 case 1: return new FDCalculation();
                 case 2: return new RDCalculation();
                 case 3: return new SIPCalculation();
+                case 4: return new RetirementCalculation();
                 default: return new EMICalculation();
             }
 
@@ -235,8 +257,8 @@ public class Calculations extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
-            return 4;
+            // Show 5 total pages.
+            return 5;
         }
 
         @Override
@@ -250,6 +272,8 @@ public class Calculations extends AppCompatActivity {
                     return "RD";
                 case 3:
                     return "SIP";
+                case 4:
+                    return "Retirement";
             }
             return null;
         }

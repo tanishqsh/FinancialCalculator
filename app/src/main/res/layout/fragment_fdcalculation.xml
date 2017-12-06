@@ -29,7 +29,7 @@
                 android:text="FD | MATURITY VALUE"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
-                android:textSize="21sp"
+                android:textSize="@dimen/titleSize"
                 android:paddingTop="10dp"
                 android:gravity="bottom"
                 android:paddingBottom="5dp"
@@ -50,7 +50,7 @@
                     android:text="₹"
                     android:layout_weight="9"
                     android:textColor="#FFFFFF"
-                    android:textSize="39sp"
+                    android:textSize="@dimen/h1"
                     android:layout_height="match_parent" />
 
                 <TextView
@@ -59,7 +59,7 @@
                     android:text="300"
                     android:layout_weight="1"
                     android:textColor="#FFFFFF"
-                    android:textSize="39sp"
+                    android:textSize="@dimen/h1"
                     android:layout_height="match_parent" />
 
             </LinearLayout>
@@ -106,7 +106,7 @@
                         android:text="₹"
                         android:layout_weight="9"
                         android:textColor="#FFFFFF"
-                        android:textSize="25sp"
+                        android:textSize="@dimen/h2"
                         android:layout_height="match_parent" />
 
                     <TextView
@@ -115,7 +115,7 @@
                         android:text="256"
                         android:layout_weight="1"
                         android:textColor="#FFFFFF"
-                        android:textSize="25sp"
+                        android:textSize="@dimen/h2"
                         android:layout_height="match_parent" />
 
                 </LinearLayout>
@@ -190,7 +190,7 @@
                 android:layout_weight="1"
                 android:text="DEPOSIT"
                 android:textColor="@color/primary_fd"
-                android:textSize="21sp"
+                android:textSize="@dimen/h3"
                 android:layout_height="match_parent" />
 
             <LinearLayout
@@ -252,7 +252,7 @@
                     android:layout_weight="1"
                     android:text="INTEREST RATE"
                     android:textColor="@color/primary_fd"
-                    android:textSize="21sp"
+                    android:textSize="@dimen/h3"
                     android:layout_height="match_parent" />
 
                 <LinearLayout
@@ -325,9 +325,9 @@
                     android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="TENURE "
+                    android:text="TENURE"
                     android:textColor="@color/primary_fd"
-                    android:textSize="21sp"
+                    android:textSize="@dimen/h3"
                     android:layout_height="match_parent" />
 
                 <LinearLayout
@@ -343,7 +343,7 @@
                         android:layout_weight="3.5"
                         android:inputType="number"
                         android:gravity="center"
-                        android:textSize="13sp"
+                        android:textSize="21sp"
                         android:text="3"
                         android:maxLength="2"
                         android:padding="10dp"
@@ -392,7 +392,7 @@
             <Button
                 android:id="@+id/statsButton"
                 android:layout_width="300dp"
-                android:textSize="15sp"
+                android:textSize="@dimen/h3"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:textColor="#FFFFFF"
@@ -405,7 +405,7 @@
             <Button
                 android:id="@+id/ShareButton"
                 android:layout_width="300dp"
-                android:textSize="15sp"
+                android:textSize="@dimen/h3"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:textColor="@color/primary_fd"

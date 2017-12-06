@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:weightSum="10"
     android:background="#FFFFFF"
-    tools:context="com.madhouseapps.financialcalculator.SIPCalculation">
+    tools:context="com.madhouseapps.financialcalculator.RetirementCalculation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:layout_weight="7"
         android:weightSum="2"
         android:orientation="vertical"
-        android:background="@drawable/yellowgrad">
+        android:background="@drawable/orangegrad">
 
         <!-- EMI -->
         <LinearLayout
@@ -26,7 +26,7 @@
             <TextView
                 android:id="@+id/MVTitle"
                 android:layout_width="match_parent"
-                android:text="SIP | FUTURE RETURN"
+                android:text="AMOUNT AT RETIREMENT"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/titleSize"
@@ -88,7 +88,7 @@
                     android:textColor="#FFFFFF"
                     android:textSize="13sp"
                     android:gravity="center_vertical"
-                    android:text="RETURNS"
+                    android:text="INTEREST"
                     android:layout_height="match_parent" />
 
                 <!-- Interest $300 row -->
@@ -165,8 +165,8 @@
                 android:layout_width="wrap_content"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:text="MONTHLY DEPOSIT"
-                android:textColor="@color/primary_sip"
+                android:text="SAVINGS PER MONTH"
+                android:textColor="@color/primary_rp"
                 android:textSize="@dimen/h3"
                 android:layout_height="match_parent" />
 
@@ -184,20 +184,23 @@
                     android:textSize="20sp"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/primary_sip"
+                    android:textColor="@color/primary_rp"
                     android:layout_height="match_parent" />
 
                 <EditText
                     android:id="@+id/DepositInput"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:padding="10dp"
+
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="2"
-                    android:text="5000"
+                    android:text="1000"
                     android:maxLength="9"
-                    android:textColor="@color/primary_sip"
+                    android:textSize="@dimen/h3"
+                    android:textColor="@color/primary_rp"
                     android:paddingStart="20sp"
-                    android:background="@drawable/yellowrectangles"
+                    android:background="@drawable/orangerectangles"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -214,7 +217,7 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
 
-            <!-- RATE -->
+            <!-- Current Age -->
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_weight="1"
@@ -223,55 +226,34 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/RateTitle"
+                    android:id="@+id/CurrentAgeTitle"
                     android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="EXPECTED RATE"
-                    android:textColor="@color/primary_sip"
+                    android:text="CURRENT AGE"
+                    android:textColor="@color/primary_rp"
                     android:textSize="@dimen/h3"
                     android:layout_height="match_parent" />
 
                 <LinearLayout
-                    android:layout_width="250dp"
-                    android:orientation="horizontal"
+                    android:layout_width="160dp"
+                    android:layout_gravity="left"
                     android:weightSum="10"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content">
-
-                    <SeekBar
-                        android:id="@+id/RateChanger"
-                        android:layout_width="match_parent"
-                        android:layout_weight="2"
-                        android:foregroundTint="@color/primary_sip"
-                        android:layout_gravity="center"
-                        android:padding="0sp"
-                        android:max="250"
-                        android:layout_height="wrap_content" />
+                    android:layout_marginLeft="50dp"
+                    android:layout_height="50dp">
 
                     <EditText
-                        android:id="@+id/RatePercent"
+                        android:id="@+id/CurrentAgeInput"
                         android:layout_width="match_parent"
-                        android:layout_weight="4"
+                        android:layout_weight="5"
+                        android:inputType="number"
                         android:gravity="center"
-                        android:inputType="numberDecimal"
-                        android:maxLength="4"
-                        android:text="12"
-                        android:textColor="@color/primary_sip"
-                        android:textSize="13sp"
-                        android:padding="10sp"
-                        android:background="@drawable/yellowrectangles"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_weight="4"
-                        android:gravity="left"
-                        android:inputType="numberDecimal"
-                        android:maxLength="4"
-                        android:text="%"
-                        android:textColor="@color/primary_sip"
-                        android:textSize="13sp"
-                        android:padding="10sp"
+                        android:textSize="@dimen/h3"
+                        android:text="20"
+                        android:maxLength="2"
+                        android:padding="10dp"
+                        android:textColor="@color/primary_rp"
+                        android:background="@drawable/orangerectangles"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -297,57 +279,37 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/TenureTitle"
+                    android:id="@+id/RetirementAgeTitle"
                     android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="TENURE"
-                    android:textColor="@color/primary_sip"
+                    android:text="RETIREMENT AGE"
+                    android:textColor="@color/primary_rp"
                     android:textSize="@dimen/h3"
                     android:layout_height="match_parent" />
 
                 <LinearLayout
-                    android:layout_width="200dp"
-                    android:orientation="horizontal"
+                    android:layout_width="160dp"
+                    android:layout_gravity="left"
                     android:weightSum="10"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content">
+                    android:layout_marginLeft="50dp"
+                    android:layout_height="50dp">
 
                     <EditText
-                        android:id="@+id/TenureInput"
+                        android:id="@+id/RetirementAgeInput"
                         android:layout_width="match_parent"
-                        android:layout_weight="3.5"
+                        android:layout_weight="5"
                         android:inputType="number"
                         android:gravity="center"
                         android:textSize="@dimen/h3"
-                        android:text="5"
+                        android:text="60"
                         android:maxLength="2"
                         android:padding="10dp"
-                        android:textColor="@color/primary_sip"
-                        android:background="@drawable/yellowrectangles"
+                        android:textColor="@color/primary_rp"
+                        android:background="@drawable/orangerectangles"
                         android:layout_height="wrap_content" />
 
-                    <TextView
-                        android:id="@+id/TenureOptionsYearly"
-                        android:layout_width="match_parent"
-                        android:layout_weight="3.25"
-                        android:gravity="center"
-                        android:text="years"
-                        android:textColor="@color/primary_sip"
-                        android:textSize="14sp"
-                        android:padding="5sp"
-                        android:layout_height="wrap_content" />
 
-                    <TextView
-                        android:id="@+id/TenureOptionsMonthly"
-                        android:layout_width="match_parent"
-                        android:layout_weight="3.25"
-                        android:gravity="center"
-                        android:text="months"
-                        android:textColor="#000000"
-                        android:textSize="10sp"
-                        android:padding="5sp"
-                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -376,7 +338,7 @@
                 android:text="Statistics"
                 android:layout_marginBottom="5dp"
                 style="?android:attr/borderlessButtonStyle"
-                android:background="@drawable/yellowbutton"
+                android:background="@drawable/orangebutton"
                 android:layout_height="wrap_content" />
 
             <Button
@@ -385,10 +347,10 @@
                 android:textSize="@dimen/h3"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:textColor="@color/primary_sip"
+                android:textColor="@color/primary_rp"
                 android:text="Share Report"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/share_sip"
+                android:background="@drawable/share_retirement"
                 android:layout_height="wrap_content" />
 
 

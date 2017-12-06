@@ -29,7 +29,7 @@
                 android:text="EMI"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
-                android:textSize="21sp"
+                android:textSize="@dimen/titleSize"
                 android:paddingTop="10dp"
                 android:gravity="bottom"
                 android:paddingLeft="30dp"
@@ -50,7 +50,7 @@
                     android:text="₹"
                     android:layout_weight="9"
                     android:textColor="#FFFFFF"
-                    android:textSize="39sp"
+                    android:textSize="@dimen/h1"
                     android:layout_height="match_parent" />
 
                 <TextView
@@ -58,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:text="300"
                     android:textColor="#FFFFFF"
-                    android:textSize="39sp"
+                    android:textSize="@dimen/h1"
                     android:layout_height="match_parent" />
             </LinearLayout>
 
@@ -86,7 +86,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="30sp"
                     android:textColor="#FFFFFF"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/titleSize"
                     android:gravity="center_vertical"
                     android:text="INTEREST"
                     android:layout_height="match_parent" />
@@ -105,7 +105,7 @@
                         android:text="₹"
                         android:layout_weight="9"
                         android:textColor="#FFFFFF"
-                        android:textSize="25sp"
+                        android:textSize="@dimen/h2"
                         android:layout_height="match_parent" />
 
                     <TextView
@@ -115,7 +115,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:textColor="#FFFFFF"
-                        android:textSize="25sp"
+                        android:textSize="@dimen/h2"
                         android:layout_height="match_parent" />
 
                 </LinearLayout>
@@ -138,7 +138,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="10sp"
                     android:textColor="#FFFFFF"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/titleSize"
                     android:gravity="center_vertical"
                     android:text="TOTAL PAYABLE"
                     android:layout_height="match_parent" />
@@ -157,7 +157,7 @@
                         android:text="₹"
                         android:layout_weight="9"
                         android:textColor="#FFFFFF"
-                        android:textSize="25sp"
+                        android:textSize="@dimen/h2"
                         android:layout_height="match_parent" />
 
                     <TextView
@@ -167,7 +167,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:textColor="#FFFFFF"
-                        android:textSize="25sp"
+                        android:textSize="@dimen/h2"
                         android:layout_height="match_parent" />
 
                 </LinearLayout>
@@ -206,7 +206,7 @@
                 android:layout_weight="1"
                 android:text="LOAN AMOUNT"
                 android:textColor="@color/primary_emi"
-                android:textSize="21sp"
+                android:textSize="@dimen/h3"
                 android:layout_height="match_parent" />
 
             <LinearLayout
@@ -268,7 +268,7 @@
                     android:layout_weight="1"
                     android:text="INTEREST RATE"
                     android:textColor="@color/primary_emi"
-                    android:textSize="21sp"
+                    android:textSize="@dimen/h3"
                     android:layout_height="match_parent" />
 
                 <LinearLayout
@@ -341,7 +341,7 @@
                     android:layout_weight="1"
                     android:text="TENURE "
                     android:textColor="@color/primary_emi"
-                    android:textSize="21sp"
+                    android:textSize="@dimen/h3"
                     android:layout_height="match_parent" />
 
                 <LinearLayout
@@ -357,7 +357,7 @@
                         android:layout_weight="3.5"
                         android:inputType="number"
                         android:gravity="center"
-                        android:textSize="21sp"
+                        android:textSize="@dimen/h3"
                         android:text="5"
                         android:maxLength="2"
                         android:padding="10dp"
@@ -407,7 +407,7 @@
             <Button
                 android:id="@+id/statsButton"
                 android:layout_width="300dp"
-                android:textSize="15sp"
+                android:textSize="@dimen/h3"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
@@ -420,7 +420,7 @@
             <Button
                 android:id="@+id/ShareButton"
                 android:layout_width="300dp"
-                android:textSize="15sp"
+                android:textSize="@dimen/h3"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:textColor="@color/primary_emi"

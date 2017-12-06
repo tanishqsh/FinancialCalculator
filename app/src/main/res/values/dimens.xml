@@ -4,7 +4,13 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
-
-
     <dimen name="paddingLeftUpperBar">30dp</dimen>
+
+    <!-- FinCal Declarative -->
+    <dimen name="titleSize"> 13sp </dimen>
+    <dimen name="h1">34sp</dimen>
+    <dimen name="h2">21sp</dimen>
+    <dimen name="h3">15sp</dimen>
+    <dimen name="h4">10sp</dimen>
+
 </resources>

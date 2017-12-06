@@ -77,7 +77,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="2"
-        android:weightSum="4"
+        android:weightSum="5"
         android:layout_height="0dp">
 
         <LinearLayout
@@ -87,13 +87,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="50dp"
                 android:id="@+id/EMIButton"
                 android:background="@drawable/redcircle"
                 android:gravity="center"
                 android:text="EMI"
                 android:textColor="#FFF"
-                android:layout_height="70dp" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
         <LinearLayout
@@ -103,13 +103,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="50dp"
                 android:id="@+id/FDButton"
                 android:background="@drawable/bluecircle"
                 android:gravity="center"
                 android:text="FD"
                 android:textColor="#FFF"
-                android:layout_height="70dp" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
         <LinearLayout
@@ -119,13 +119,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="50dp"
                 android:id="@+id/RDButton"
                 android:background="@drawable/greencircle"
                 android:gravity="center"
                 android:text="RD"
                 android:textColor="#FFF"
-                android:layout_height="70dp" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
         <LinearLayout
@@ -135,13 +135,30 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="50dp"
                 android:id="@+id/SIPButton"
                 android:background="@drawable/yellowcircle"
                 android:gravity="center"
                 android:text="SIP"
                 android:textColor="#FFF"
-                android:layout_height="70dp" />
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="50dp"
+                android:id="@+id/RPButton"
+                android:background="@drawable/orangecircle"
+                android:gravity="center"
+                android:text="RP"
+                android:textColor="#FFF"
+                android:layout_height="50dp" />
 
         </LinearLayout>
 
@@ -150,30 +167,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="2"
-        android:weightSum="2"
+        android:weightSum="3"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_height="0dp">
 
         <TextView
-            android:layout_width="70dp"
+            android:layout_width="50dp"
             android:id="@+id/FAQButton"
             android:background="@drawable/blackcircle"
             android:gravity="center"
             android:text="FAQs"
             android:layout_margin="5dp"
             android:textColor="#FFF"
-            android:layout_height="70dp" />
+            android:textSize="8sp"
+            android:layout_height="50dp" />
 
         <TextView
-            android:layout_width="70dp"
+            android:layout_width="50dp"
             android:id="@+id/ShareButton"
             android:background="@drawable/blackcircle"
             android:gravity="center"
             android:text="SHARE"
+            android:textSize="8sp"
             android:layout_margin="5dp"
             android:textColor="#FFF"
-            android:layout_height="70dp" />
+            android:layout_height="50dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:id="@+id/RateButton"
+            android:background="@drawable/blackcircle"
+            android:gravity="center"
+            android:text="RATE"
+            android:textSize="8sp"
+            android:layout_margin="5dp"
+            android:textColor="#FFF"
+            android:layout_height="50dp" />
 
     </LinearLayout>
 </LinearLayout>

@@ -29,7 +29,7 @@ public class Statistics extends AppCompatActivity {
     int tenure;
     int tenure_type; /** 1 for Year - 0 for Month **/
     double compounding; /** Only for FD, 1 for Monthly, 2 for Quarterly, 3 for Half Yearly, 4 for Yearly **/
-    int calculation; /** 1 for EMI, 2 for FD, 3 for RD, 4 for SIP **/
+    int calculation; /** 1 for EMI, 2 for FD, 3 for RD, 4 for SIP, 5 for RP **/
     float MV; /** for FD, RD and SIP **/
     float interest;
     float emi;
@@ -85,6 +85,10 @@ public class Statistics extends AppCompatActivity {
                 break;
             case 4:
                 drawSIPGraph();
+                break;
+            case 5:
+                drawRPGraph();
+                break;
         }
 
     }
@@ -93,13 +97,13 @@ public class Statistics extends AppCompatActivity {
     public void drawEMIGraph(){
 
         if(tenure_type==1){
-            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Balance"));
+            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Principle Balance"));
         } else {
-            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Balance"));
-
+            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Principle Balance"));
         }
 
 
+        double loanA = amount;
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
         yvalues.add(new PieEntry(amount, "Loan Amount"));
         yvalues.add(new PieEntry(interest, "Interest"));
@@ -150,7 +154,7 @@ public class Statistics extends AppCompatActivity {
             double P = emi - I;
             amount = (float) (amount - P);
             fullReturn = fullReturn-emi;
-            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(P), ""+Math.round(I),""+Math.round(fullReturn)));
+            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(P), ""+Math.round(I),""+Math.round(amount)));
 
         }
 
@@ -367,6 +371,70 @@ public class Statistics extends AppCompatActivity {
             MVa = MVa + amount;
 
         }
+
+    }
+
+
+    //rdgraph
+    public void drawRPGraph(){
+
+        tenure = tenure*12;
+
+        tableHead.addView(new TableRow(this, "Month", "Interest", "Value"));
+
+        ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
+        yvalues.add(new PieEntry(amount*tenure, "Amount"));
+        yvalues.add(new PieEntry(interest, "Interest"));
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+        colors.add(getResources().getColor(R.color.primary_rp));
+        colors.add(Color.parseColor("#FF5722"));
+
+        PieDataSet dataSet = new PieDataSet(yvalues, "");
+        dataSet.setColors(colors);
+        dataSet.setValueTextColor(getResources().getColor(R.color.primary_rp));
+
+        PieData pieData = new PieData(dataSet);
+        pieData.setValueTextColor(Color.WHITE);
+        pieData.setValueTextSize(14);
+        pieData.setValueTypeface(poppins_bold);
+
+        chart.setData(pieData);
+        chart.setCenterText("Return: "+MV);
+        chart.setCenterTextTypeface(poppins_bold);
+        chart.animateX(500);
+        chart.setCenterTextColor(getResources().getColor(R.color.primary_rp));
+        desc.setText("Retirement Amount");
+        desc.setTypeface(poppins_bold);
+        chart.setDescription(desc);
+        chart.getLegend().setTextColor(Color.WHITE);
+
+
+        double rate2 = (rate) / 400;
+        double local_tenure = tenure;
+        double year_tenure;
+
+        //getting all the inputs perfectly
+
+        double MV=0;
+        double amt;
+        double interest=0;
+        /*
+
+        For RD, we have to calculate Maturity of each month and then add them.
+
+         */
+        for(int i=0; i<tenure; i++){
+
+            year_tenure = local_tenure / 12;
+            amt = amount * Math.pow((1 + rate2), 4*year_tenure);
+            interest = (amt - amount);
+            MV = MV + amt;
+            local_tenure = local_tenure - 1;
+            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(interest), ""+Math.round(MV)));
+
+        }
+
 
     }
 }

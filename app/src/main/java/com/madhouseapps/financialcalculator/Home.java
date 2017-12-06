@@ -1,8 +1,12 @@
 package com.madhouseapps.financialcalculator;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,15 +20,18 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Home extends AppCompatActivity {
 
-    TextView MAD, HOUSE, Quote, Author, EMIButton, SIPButton, RDButton, FDButton;
+    TextView MAD, HOUSE, Quote, Author, EMIButton, SIPButton, RDButton, FDButton, RPButton;
     Typeface poppins_bold;
     Typeface poppins_regular;
     TextView FAQs;
     TextView Share;
+    TextView Rate;
 
     String quotes[];
     String authors[];
     String emDash;
+
+    final int PERMISSION_CODE = 13;
 
 
     @Override
@@ -50,8 +57,10 @@ public class Home extends AppCompatActivity {
         RDButton = (TextView) findViewById(R.id.RDButton);
         SIPButton = (TextView) findViewById(R.id.SIPButton);
         FDButton = (TextView) findViewById(R.id.FDButton);
+        RPButton = (TextView) findViewById(R.id.RPButton);
         FAQs = (TextView) findViewById(R.id.FAQButton);
         Share = (TextView) findViewById(R.id.ShareButton);
+        Rate = (TextView) findViewById(R.id.RateButton);
 
         MAD.setTypeface(poppins_regular);
         HOUSE.setTypeface(poppins_bold);
@@ -61,8 +70,9 @@ public class Home extends AppCompatActivity {
         RDButton.setTypeface(poppins_bold);
         FDButton.setTypeface(poppins_bold);
         SIPButton.setTypeface(poppins_bold);
+        RPButton.setTypeface(poppins_bold);
 
-        /**
+        /*
          * Getting a random number between 0 to length of quotes array
          */
         Random random = new Random();
@@ -106,6 +116,15 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        RPButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Calculations.class);
+                intent.putExtra("Choice", 5);
+                startActivity(intent);
+            }
+        });
+
         FAQs.setTypeface(poppins_bold);
         Share.setTypeface(poppins_bold);
 
@@ -129,8 +148,53 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+            }
+        });
+
+        askForPermission();
 
 
+    }
 
+    private void askForPermission() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                Toast.makeText(this, "Permission required to save report!", Toast.LENGTH_SHORT).show();
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISSION_CODE);
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISSION_CODE);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
     }
 }
