@@ -29,7 +29,8 @@
                 android:text="RD | MATURITY VALUE"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/titleSize"
+                android:textSize="@dimen/h3
+"
                 android:paddingTop="10dp"
                 android:gravity="bottom"
                 android:paddingLeft="30dp"

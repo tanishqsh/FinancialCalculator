@@ -1,8 +1,8 @@
 package com.madhouseapps.financialcalculator;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
@@ -11,12 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.madhouseapps.financialcalculator.Helper.MadHouseDialog;
+import com.madhouseapps.financialcalculator.Helper.PreferenceManager;
+
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Home extends AppCompatActivity {
 
@@ -32,6 +33,8 @@ public class Home extends AppCompatActivity {
     String emDash;
 
     final int PERMISSION_CODE = 13;
+
+    PreferenceManager preferenceManager;
 
 
     @Override
@@ -71,6 +74,27 @@ public class Home extends AppCompatActivity {
         FDButton.setTypeface(poppins_bold);
         SIPButton.setTypeface(poppins_bold);
         RPButton.setTypeface(poppins_bold);
+        Rate.setTypeface(poppins_bold);
+
+        preferenceManager = new PreferenceManager(this);
+        int reportCount = preferenceManager.getIntegerPreferences("ReportCount");
+        if(reportCount!=0 && reportCount%6==0){
+            MadHouseDialog madHouseDialog = new MadHouseDialog(Home.this);
+            madHouseDialog.show();
+        }
+
+        preferenceManager.addIntegerPreference("ReportCount", preferenceManager.getIntegerPreferences("ReportCount")+1);
+
+
+        //TODO: Remove this
+        HOUSE.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                MadHouseDialog madHouseDialog = new MadHouseDialog(Home.this);
+                madHouseDialog.show();
+                return true;
+            }
+        });
 
         /*
          * Getting a random number between 0 to length of quotes array

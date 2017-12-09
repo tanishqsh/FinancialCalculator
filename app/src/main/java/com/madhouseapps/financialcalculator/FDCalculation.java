@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.madhouseapps.financialcalculator.Helper.PreferenceManager;
 import com.madhouseapps.financialcalculator.ReportGeneration.EMIReport;
 import com.madhouseapps.financialcalculator.ReportGeneration.FDReport;
 
@@ -60,6 +61,7 @@ public class FDCalculation extends Fragment {
     List<String> compoundingOptions = new ArrayList<>();
 
     TextWatcher textWatcher;
+    PreferenceManager preferenceManager;
 
     public FDCalculation() {
     }
@@ -69,6 +71,8 @@ public class FDCalculation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_fdcalculation, container, false);
+
+        preferenceManager = new PreferenceManager(getContext());
 
 
         MVtitle = (TextView) rootView.findViewById(R.id.MVtitle);
@@ -169,8 +173,10 @@ public class FDCalculation extends Fragment {
                         RatePercent.setText(""+decimalProgress);
                     }
 
-                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                            Integer.parseInt(TenureInput.getText().toString().trim()));
+                    if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                        CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                                Integer.parseInt(TenureInput.getText().toString().trim()));
+                    }
 
 
                 }
@@ -201,8 +207,10 @@ public class FDCalculation extends Fragment {
                 TenureOptionsMonthly.setTextSize(10);
                 mory = true;
 
-                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        Integer.parseInt(TenureInput.getText().toString().trim()));
+                if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                            Integer.parseInt(TenureInput.getText().toString().trim()));
+                }
 
             }
         });
@@ -216,9 +224,10 @@ public class FDCalculation extends Fragment {
                 TenureOptionsYearly.setTextSize(10);
                 mory = false;
 
-                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        Integer.parseInt(TenureInput.getText().toString().trim()));
-
+                if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                            Integer.parseInt(TenureInput.getText().toString().trim()));
+                }
             }
         });
 
@@ -300,6 +309,7 @@ public class FDCalculation extends Fragment {
                 if(MVAmount.getText().toString().equals("-")){
                     Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
                 } else {
+
                     Intent intent = new Intent(getContext(), FDReport.class);
                     intent.putExtra("DEPOSIT", DepositInput.getText().toString());
                     intent.putExtra("INTERESTRATE", String.valueOf(progress_value));
@@ -349,7 +359,7 @@ public class FDCalculation extends Fragment {
 
     public void CalculateAndSet(int amount, int tenure){
 
-        if(!DepositInput.getText().toString().equals("")) {
+        if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("") && !RatePercent.getText().toString().equals("")) {
             double rate2 = (progress_value) / 100;
             int n = 4;
             //converting months to years

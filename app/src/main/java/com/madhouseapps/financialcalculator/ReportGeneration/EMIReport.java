@@ -85,7 +85,7 @@ public class EMIReport extends AppCompatActivity implements ViewTreeObserver.OnG
 
         principalView.setText("PRINCIPAL LOAN AMOUNT: "+rupee+" "+principal);
         emiView.setText("EMI:  "+rupee+" "+emi);
-        interestRateView.setText("INTEREST RATE:  "+interestRate+"% p.a");
+        interestRateView.setText("INTEREST RATE:  "+Math.round(Float.parseFloat(interestRate))+"% p.a");
         interestView.setText("INTEREST: "+rupee+" "+interest);
 
         if(mory==1){

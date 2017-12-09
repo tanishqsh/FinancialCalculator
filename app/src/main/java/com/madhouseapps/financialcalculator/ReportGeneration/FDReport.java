@@ -84,7 +84,7 @@ public class FDReport extends AppCompatActivity implements ViewTreeObserver.OnGl
 
         depositView.setText("FIXED DEPOSIT: "+rupee+" "+deposit);
         MVView.setText("MATURITY VALUE:  "+rupee+" "+MV);
-        interestRateView.setText("INTEREST RATE:  "+interestRate+"% p.a");
+        interestRateView.setText("INTEREST RATE:  "+Math.round(Float.parseFloat(interestRate))+"% p.a");
         interestView.setText("INTEREST EARNED: "+rupee+" "+interest);
 
         if(mory==1){

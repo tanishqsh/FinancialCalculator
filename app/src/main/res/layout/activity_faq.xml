@@ -113,6 +113,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
+                <TextView
+                    android:id="@+id/RPQuestionTitle"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/primary_rp"
+                    android:text="What is Retirement Planning?"
+                    android:textSize="21sp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/rpdescription"
+                    android:textColor="@color/material_black"
+                    android:text="@string/rp_description"
+                    android:textSize="13sp"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
 
 

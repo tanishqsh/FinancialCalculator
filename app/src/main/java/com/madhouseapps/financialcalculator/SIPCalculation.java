@@ -18,6 +18,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.madhouseapps.financialcalculator.Helper.PreferenceManager;
 import com.madhouseapps.financialcalculator.ReportGeneration.RDReport;
 import com.madhouseapps.financialcalculator.ReportGeneration.SIPReport;
 
@@ -40,6 +41,8 @@ public class SIPCalculation extends Fragment {
 
     TextWatcher textWatcher;
 
+    PreferenceManager preferenceManager;
+
     /*
 true for year
 false for month
@@ -57,6 +60,7 @@ false for month
         View rootView = inflater.inflate(R.layout.fragment_sipcalculation, container, false);
 
 
+        preferenceManager = new PreferenceManager(getContext());
         MVtitle = (TextView) rootView.findViewById(R.id.MVTitle);
         MVAmount = (TextView) rootView.findViewById(R.id.MVAmount);
         InterestTitle = (TextView) rootView.findViewById(R.id.InterestTitle);
@@ -147,8 +151,10 @@ false for month
                         RatePercent.setText(String.valueOf(decimalProgress));
                     }
 
-                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                            Integer.parseInt(TenureInput.getText().toString().trim()));
+                    if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                        CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                                Integer.parseInt(TenureInput.getText().toString().trim()));
+                    }
 
 
                 }
@@ -181,8 +187,11 @@ false for month
             @Override
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
-                    CalculateAndSet(Integer.parseInt(s.toString().trim()),
-                            Integer.parseInt(TenureInput.getText().toString().trim()));
+
+                    if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                        CalculateAndSet(Integer.parseInt(s.toString().trim()),
+                                Integer.parseInt(TenureInput.getText().toString().trim()));
+                    }
                 } else {
                     MVAmount.setText(emptyLiteral);
                     InterestAmount.setText(emptyLiteral);
@@ -206,8 +215,10 @@ false for month
                 TenureOptionsMonthly.setTextSize(10);
                 mory = true;
 
-                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        Integer.parseInt(TenureInput.getText().toString().trim()));
+                if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                            Integer.parseInt(TenureInput.getText().toString().trim()));
+                }
             }
         });
 
@@ -220,8 +231,10 @@ false for month
                 TenureOptionsYearly.setTextSize(10);
                 mory = false;
 
-                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        Integer.parseInt(TenureInput.getText().toString().trim()));
+                if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                            Integer.parseInt(TenureInput.getText().toString().trim()));
+                }
             }
         });
 
@@ -243,9 +256,11 @@ false for month
             @Override
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
+                    if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                        CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                                Integer.parseInt(s.toString().trim()));
+                    }
 
-                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                            Integer.parseInt(s.toString().trim()));
                 } else {
                     MVAmount.setText(emptyLiteral);
                     InterestAmount.setText(emptyLiteral);
@@ -284,6 +299,7 @@ false for month
                 if(MVAmount.getText().toString().equals("-")){
                     Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
                 } else {
+
                     Intent intent = new Intent(getContext(), SIPReport.class);
                     intent.putExtra("DEPOSIT", DepositInput.getText().toString());
                     intent.putExtra("INTERESTRATE", String.valueOf(progress_value));
@@ -332,7 +348,7 @@ false for month
 
 
     public void CalculateAndSet(int amount, int tenure){
-        if(!DepositInput.getText().toString().equals("")) {
+        if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("") && !RatePercent.getText().toString().equals("")) {
             if (mory) {
                 tenure = tenure * 12;
             }

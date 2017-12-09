@@ -84,7 +84,7 @@ public class SIPReport extends AppCompatActivity implements ViewTreeObserver.OnG
 
         depositView.setText("SIP : "+rupee+" "+deposit);
         MVView.setText("MATURITY VALUE:  "+rupee+" "+MV);
-        interestRateView.setText("EXPECTED RATE:  "+interestRate+"% p.a");
+        interestRateView.setText("EXPECTED RATE:  "+Math.round(Float.parseFloat(interestRate))+"% p.a");
         interestView.setText("RETURN: "+rupee+" "+interest);
 
         if(mory==1){

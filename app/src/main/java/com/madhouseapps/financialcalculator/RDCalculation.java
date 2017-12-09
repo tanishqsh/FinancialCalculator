@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.madhouseapps.financialcalculator.Helper.PreferenceManager;
 import com.madhouseapps.financialcalculator.ReportGeneration.FDReport;
 import com.madhouseapps.financialcalculator.ReportGeneration.RDReport;
 
@@ -50,6 +51,7 @@ public class RDCalculation extends Fragment {
     */
     boolean mory = true;
 
+    PreferenceManager preferenceManager;
 
     public RDCalculation() {
     }
@@ -61,6 +63,7 @@ public class RDCalculation extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_rdcalculation, container, false);
 
 
+        preferenceManager = new PreferenceManager(getContext());
         MVtitle = (TextView) rootView.findViewById(R.id.MVTitle);
         MVAmount = (TextView) rootView.findViewById(R.id.MVAmount);
         InterestTitle = (TextView) rootView.findViewById(R.id.InterestTitle);
@@ -147,8 +150,10 @@ public class RDCalculation extends Fragment {
                         RatePercent.setText(""+decimalProgress);
                     }
 
-                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                            Integer.parseInt(TenureInput.getText().toString().trim()));
+                    if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                        CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                                Integer.parseInt(TenureInput.getText().toString().trim()));
+                    }
 
 
                 }
@@ -180,8 +185,12 @@ public class RDCalculation extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
-                    CalculateAndSet(Integer.parseInt(s.toString().trim()),
-                            Integer.parseInt(TenureInput.getText().toString().trim()));
+
+                    if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                        CalculateAndSet(Integer.parseInt(s.toString().trim()),
+                                Integer.parseInt(TenureInput.getText().toString().trim()));
+                    }
+
                 } else {
                     MVAmount.setText(emptyLiteral);
                     InterestAmount.setText(emptyLiteral);
@@ -204,8 +213,10 @@ public class RDCalculation extends Fragment {
                 TenureOptionsMonthly.setTextSize(10);
                 mory = true;
 
-                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        Integer.parseInt(TenureInput.getText().toString().trim()));
+                if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                            Integer.parseInt(TenureInput.getText().toString().trim()));
+                }
             }
         });
 
@@ -218,8 +229,10 @@ public class RDCalculation extends Fragment {
                 TenureOptionsYearly.setTextSize(10);
                 mory = false;
 
-                CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                        Integer.parseInt(TenureInput.getText().toString().trim()));
+                if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                            Integer.parseInt(TenureInput.getText().toString().trim()));
+                }
             }
         });
 
@@ -242,10 +255,10 @@ public class RDCalculation extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(!s.toString().equals("")){
-
-
-                    CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
-                            Integer.parseInt(s.toString().trim()));
+                    if(!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("")) {
+                        CalculateAndSet(Integer.parseInt(DepositInput.getText().toString().trim()),
+                                Integer.parseInt(s.toString().trim()));
+                    }
                 } else {
                     MVAmount.setText(emptyLiteral);
                     InterestAmount.setText(emptyLiteral);
@@ -285,6 +298,8 @@ public class RDCalculation extends Fragment {
                 if(MVAmount.getText().toString().equals("-")){
                     Toast.makeText(getContext(), "Incomplete Fields", Toast.LENGTH_SHORT).show();
                 } else {
+
+
                     Intent intent = new Intent(getContext(), RDReport.class);
                     intent.putExtra("DEPOSIT", DepositInput.getText().toString());
                     intent.putExtra("INTERESTRATE", String.valueOf(progress_value));
@@ -331,7 +346,7 @@ public class RDCalculation extends Fragment {
 
 
     public void CalculateAndSet(int amount, int tenure) {
-        if (!DepositInput.getText().toString().equals("")) {
+        if (!DepositInput.getText().toString().equals("") && !TenureInput.getText().toString().equals("") && !RatePercent.getText().toString().equals("")) {
 
             if (mory) {
                 tenure = tenure * 12;

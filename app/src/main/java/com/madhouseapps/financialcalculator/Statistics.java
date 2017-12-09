@@ -33,6 +33,9 @@ public class Statistics extends AppCompatActivity {
     float MV; /** for FD, RD and SIP **/
     float interest;
     float emi;
+    float total_return; /** Only for RP **/
+    float total_invested; /** Only for RP **/
+    float savings_per_month; /** Only for RP **/
 
     PieChart chart;
     Typeface poppins_bold;
@@ -66,6 +69,10 @@ public class Statistics extends AppCompatActivity {
         MV = intent.getFloatExtra("MV", 1);
         interest = intent.getFloatExtra("Interest", 1);
         emi = intent.getFloatExtra("EMI", 1);
+        total_return = intent.getFloatExtra("TotalReturn", 0);
+        total_invested = intent.getFloatExtra("TotalInvested", 0);
+        savings_per_month = intent.getFloatExtra("SavingsPerMonth", 0);
+
 
         desc = new Description();
         desc.setTextColor(Color.parseColor("#FFFFFF"));
@@ -97,9 +104,9 @@ public class Statistics extends AppCompatActivity {
     public void drawEMIGraph(){
 
         if(tenure_type==1){
-            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Principle Balance"));
+            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Principal Balance"));
         } else {
-            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Principle Balance"));
+            tableHead.addView(new TableRow(this, "Month", "Principal", "Interest", "Principal Balance"));
         }
 
 
@@ -378,13 +385,12 @@ public class Statistics extends AppCompatActivity {
     //rdgraph
     public void drawRPGraph(){
 
-        tenure = tenure*12;
 
-        tableHead.addView(new TableRow(this, "Month", "Interest", "Value"));
+        tableHead.addView(new TableRow(this, "Year", "Return", "Accumulation"));
 
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
-        yvalues.add(new PieEntry(amount*tenure, "Amount"));
-        yvalues.add(new PieEntry(interest, "Interest"));
+        yvalues.add(new PieEntry(total_invested, "Total Invested"));
+        yvalues.add(new PieEntry(total_return, "Total Return"));
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(getResources().getColor(R.color.primary_rp));
@@ -400,7 +406,7 @@ public class Statistics extends AppCompatActivity {
         pieData.setValueTypeface(poppins_bold);
 
         chart.setData(pieData);
-        chart.setCenterText("Return: "+MV);
+        chart.setCenterText(String.format("Total Accumulation %.0f", amount));
         chart.setCenterTextTypeface(poppins_bold);
         chart.animateX(500);
         chart.setCenterTextColor(getResources().getColor(R.color.primary_rp));
@@ -409,31 +415,30 @@ public class Statistics extends AppCompatActivity {
         chart.setDescription(desc);
         chart.getLegend().setTextColor(Color.WHITE);
 
-
-        double rate2 = (rate) / 400;
-        double local_tenure = tenure;
-        double year_tenure;
-
-        //getting all the inputs perfectly
-
-        double MV=0;
+        double currentAmount=0;
+        double final_rate = rate / 400;
+        double local_tenure = tenure * 12;
+        double yearly_tenure;
+        double month_interest=0;
+        double yearly_acc_interest=0;
         double amt;
-        double interest=0;
-        /*
 
-        For RD, we have to calculate Maturity of each month and then add them.
-
-         */
         for(int i=0; i<tenure; i++){
-
-            year_tenure = local_tenure / 12;
-            amt = amount * Math.pow((1 + rate2), 4*year_tenure);
-            interest = (amt - amount);
-            MV = MV + amt;
-            local_tenure = local_tenure - 1;
-            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(interest), ""+Math.round(MV)));
-
+            for(int j=0; j<12; j++){
+                yearly_tenure = local_tenure / 12;
+                amt = savings_per_month * Math.pow((1 + final_rate), 4*yearly_tenure);
+                month_interest =  amt - savings_per_month;
+                currentAmount = currentAmount + amt;
+                local_tenure = local_tenure-1;
+                yearly_acc_interest = yearly_tenure + month_interest;
+            }
+            tableArea.addView(new TableRow(this, ""+(i+1), ""+Math.round(yearly_acc_interest), ""+Math.round(currentAmount)));
+            month_interest = 0;
         }
+
+
+
+
 
 
     }

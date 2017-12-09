@@ -18,6 +18,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.madhouseapps.financialcalculator.Helper.PreferenceManager;
 import com.madhouseapps.financialcalculator.ReportGeneration.EMIReport;
 
 
@@ -45,6 +46,8 @@ public class EMICalculation extends Fragment {
 
     TextWatcher textWatcher;
 
+    PreferenceManager preferenceManager;
+
     public EMICalculation() {
         // Required empty public constructor
     }
@@ -55,6 +58,8 @@ public class EMICalculation extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_emicalculation, container, false);
+
+        preferenceManager = new PreferenceManager(getContext());
 
         emiAmount = (TextView) view.findViewById(R.id.EMIAmount);
         emiTitle = (TextView) view.findViewById(R.id.EMITitle);
@@ -124,15 +129,19 @@ public class EMICalculation extends Fragment {
                         //Dont do anything, wait for him to enter something after the '.'
                     } else {
                         if(!s.toString().equals("")){
-
                             double value = Double.parseDouble(s.toString());
                             value = value * 10;
                             rateChanger.setProgress((int)value);
                             decimalProgress = (float)(Double.parseDouble(s.toString()));
                             progress_value = decimalProgress;
-                            CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
-                                    mory,
-                                    Integer.parseInt(tenureInput.getText().toString().trim()));
+                            if(!loanInput.getText().toString().equals("") && !tenureInput.getText().toString().equals("")) {
+
+                                CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
+                                        mory,
+                                        Integer.parseInt(tenureInput.getText().toString().trim()));
+                            }
+
+
                         }
                     }
                 }
@@ -164,9 +173,13 @@ public class EMICalculation extends Fragment {
                         ratePercent.setText(""+decimalProgress);
                     }
 
-                    CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
-                            mory,
-                            Integer.parseInt(tenureInput.getText().toString().trim()));
+                    if(!loanInput.getText().toString().equals("") && !tenureInput.getText().toString().equals("")){
+                        CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
+                                mory,
+                                Integer.parseInt(tenureInput.getText().toString().trim()));
+                    }
+
+
 
 
                 }
@@ -197,9 +210,11 @@ public class EMICalculation extends Fragment {
                 tenureOptionsMonthly.setTextSize(10);
                 mory = true;
 
-                CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
-                        mory,
-                        Integer.parseInt(tenureInput.getText().toString().trim()));
+                if(!loanInput.getText().toString().equals("") && !tenureInput.getText().toString().equals("")) {
+                    CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
+                            mory,
+                            Integer.parseInt(tenureInput.getText().toString().trim()));
+                }
             }
         });
 
@@ -212,9 +227,11 @@ public class EMICalculation extends Fragment {
                 tenureOptionsYearly.setTextSize(10);
                 mory = false;
 
-                CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
-                        mory,
-                        Integer.parseInt(tenureInput.getText().toString().trim()));
+                if(!loanInput.getText().toString().equals("") && !tenureInput.getText().toString().equals("")) {
+                    CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
+                            mory,
+                            Integer.parseInt(tenureInput.getText().toString().trim()));
+                }
             }
         });
 
@@ -234,7 +251,7 @@ public class EMICalculation extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!s.toString().equals("")){
+                if(!s.toString().equals("") && !tenureInput.getText().toString().equals("") && !ratePercent.getText().toString().equals("")){
                     CalculateAndSet(Integer.parseInt(s.toString().trim()),
                             mory,
                             Integer.parseInt(tenureInput.getText().toString().trim()));
@@ -263,7 +280,7 @@ public class EMICalculation extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!s.toString().equals("")){
+                if(!s.toString().equals("") && !loanInput.toString().equals("") && !ratePercent.toString().equals("")){
                     CalculateAndSet(Integer.parseInt(loanInput.getText().toString().trim()),
                             mory,
                             Integer.parseInt(s.toString().trim()));
@@ -337,7 +354,7 @@ public class EMICalculation extends Fragment {
     @SuppressLint("SetTextI18n")
     public void CalculateAndSet(double amount, boolean mory, int tenure){
 
-        if(!loanInput.getText().toString().equals("")) {
+        if(!loanInput.getText().toString().equals("") && !ratePercent.getText().toString().equals("") && !tenureInput.getText().toString().equals("")) {
             double pV = (progress_value / 12) / 100;
             if (mory) {
                 tenure = tenure * 12;

@@ -32,7 +32,7 @@ import java.io.IOException;
 
 public class RPReport extends AppCompatActivity implements ViewTreeObserver.OnGlobalLayoutListener {
 
-    String deposit, fd, interest, interestRate, totalReturn, MV;
+    String deposit, fd, interest, interestRate, totalReturn, MV, totalInvested;
     TextView depositView, MVView, interestView, interestRateView, totalReturnView, tenureView;
     LinearLayout canvas;
     int category, tenure;
@@ -69,8 +69,10 @@ public class RPReport extends AppCompatActivity implements ViewTreeObserver.OnGl
 
 
         Intent intent = getIntent();
-        deposit = intent.getStringExtra("DEPOSIT");
+        deposit = intent.getStringExtra("ACCUMULATION");
         MV = intent.getStringExtra("MV");
+        totalReturn = intent.getStringExtra("TotalReturn");
+        totalInvested = intent.getStringExtra("TotalInvested");
         interest = intent.getStringExtra("INTEREST");
         interestRate = intent.getStringExtra("INTERESTRATE");
         tenure = intent.getIntExtra("TENURE", 0);
@@ -82,12 +84,12 @@ public class RPReport extends AppCompatActivity implements ViewTreeObserver.OnGl
 
     private void RD_Report(){
 
-        depositView.setText("SAVINGS PER MONTH: "+rupee+" "+deposit);
-        MVView.setText("AMOUNT AT RETIREMENT  "+rupee+" "+MV);
-        interestRateView.setText("INTEREST RATE:  "+interestRate+"% p.a");
-        interestView.setText("INTEREST ACCUMULATED: "+rupee+" "+interest);
+        depositView.setText("AMOUNT TO BE ACCUMULATED: "+rupee+" "+deposit);
+        MVView.setText("SAVINGS PER MONTH: "+rupee+" "+MV);
+        interestRateView.setText("EXPECTED GROWTH RATE:  "+Math.round(Float.parseFloat(interestRate))+"% p.a");
+        interestView.setText("TOTAL INVESTED "+rupee+" "+totalInvested);
         tenureView.setText("TENURE:  "+tenure+" years");
-        totalReturnView.setVisibility(View.GONE);
+        totalReturnView.setText("TOTAL RETURN: "+rupee+" "+totalReturn);
 
         canvas.getViewTreeObserver().addOnGlobalLayoutListener(this);
     }
